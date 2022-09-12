@@ -1,0 +1,6 @@
+12.09.2022
+Jätkasime palli viskaja disainimist Ootasime, et juhendajad vaataksid, meie koodi
+üle, selleks, et saakime ette näidata roboti liikumist. Tutvusime roboti akuda 
+kasutamise ohutus juhendiga ja proovisime ssh tööle saada.
+
+15.09.2022
