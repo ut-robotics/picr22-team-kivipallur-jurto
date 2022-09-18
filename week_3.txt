@@ -4,3 +4,5 @@ Jätkasime palli viskaja disainimist Ootasime, et juhendajad vaataksid, meie koo
 kasutamise ohutus juhendiga ja proovisime ssh tööle saada.
 
 15.09.2022
+Saime valmis test roboti palli viskaja disaini. Tegelesime edasi roboti liikumisega.
+Alustasime esitlus slaidide koostamist.
