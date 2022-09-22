@@ -5,3 +5,58 @@ Artur Reitalu
 Kristjan Madis Kask
 Kaspar Tamm
 Priit Teelahk
+
+
+== Blog
+
+=== Sunday 2022-09-04
+
+*Kaspar:* Soldered mainboard.  (2h) +
+*Madis:* Assembled test robot. (1h) +
+
+=== Wednesday 2022-09-07
+
+*Priit:* Established a VNC Connection.  (2h) +
+*Artur:* Helped with the VNC Connection.  (2h) +
+
+=== Thursday 2022-09-08
+
+*Kaspar:* Added heatshrink to cables. Connected a second powerswitch, which was missing.  (1.5h) +
+*Priit:* Established communication with the mainboard.  (3.5h) +
+*Artur:* Helped with Establishing a connection with the mainboard.  (3.5h) +
+
+=== Monday 2022-09-12
+
+*Madis:* Started designing the thrower. (5h) +
+*Priit:* Attempted to establish a ssh connection, but didn t have much luck.  (2h) +
+*Artur:* Also tried to get the ssh working to no avail.  (3.5h) +
+*Kaspar:* Was writing an Estonian more throrough blog.  (1.5h) +
+
+=== Thursday 2022-09-15
+
+*Madis:* Finished designing the thrower. (5h) +
+*Priit:* Got ssh working  (2h) +
+*Artur:* Helped and celebrated getting ssh working.  (2h) +
+*Kaspar:* Started doing the presentation.  (1.5h) +
+
+=== Monday 2022-09-19
+
+*Everyone except Madis:* Presented the presentation and listened to other teams. (3h) +
+
+=== Thursday 2022-09-22
+
+*Priit:* successfully opened the camera and tried different ways of detecting the balls. (4h) +
+*Artur:* finsished the ball detection and we settled for the conture route (3h) +
+
+
+
+
+
+
+
+
+
+
+
+
+
