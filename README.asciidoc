@@ -48,6 +48,7 @@ Priit Teelahk
 *Priit:* successfully opened the camera and tried different ways of detecting the balls. (4h) +
 *Artur:* finsished the ball detection and we settled for the conture route (3h) +
 *Kaspar:* Got Altium working and familiarised himself with the different components we could use.  (1.5h) +
+*Madis:* Started with CAM, but ran into some problems with arrange (1h) +
 
 
 
