@@ -7,6 +7,18 @@ Kaspar Tamm
 Priit Teelahk
 
 
+== External links
+Fusion 360 CAD - https://www.autodesk.com/products/fusion-360/overview?term=1-YEAR&tab=subscription 
+Remmina - https://remmina.org/
+Altium PCB Design - https://www.altium.com/
+VNC Viewer/Server - https://www.realvnc.com/en/connect/download/viewer/
+OpenSSH - https://www.openssh.com/
+OpenCV - https://opencv.org/
+NumPy - https://numpy.org/
+
+
+
+
 == Blog
 
 === Sunday 2022-09-04
