@@ -7,7 +7,7 @@ Kaspar Tamm
 Priit Teelahk
 
 
-== External lin
+== External links
 Fusion 360 CAD - https://www.autodesk.com/products/fusion-360/overview?term=1-YEAR&tab=subscription +
 Remmina - https://remmina.org/ +
 Altium PCB Design - https://www.altium.com/ +
