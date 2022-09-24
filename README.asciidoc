@@ -62,7 +62,8 @@ NumPy - https://numpy.org/ +
 *Kaspar:* Got Altium working and familiarised himself with the different components we could use.  (1.5h) +
 *Madis:* Started with CAM, but ran into some problems with arrange (1h) +
 
-
+=== Saturday 2022-09-25
+*Madis:* Finished Fusion 360 CAM and waiting for supervision. (2h) +
 
 
 
