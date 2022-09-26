@@ -62,8 +62,16 @@ NumPy - https://numpy.org/ +
 *Kaspar:* Got Altium working and familiarised himself with the different components we could use.  (1.5h) +
 *Madis:* Started with CAM, but ran into some problems with arrange (1h) +
 
-=== Saturday 2022-09-25
+=== Saturday 2022-09-24
 *Madis:* Finished Fusion 360 CAM and waiting for supervision. (2h) +
+
+=== Monday 2022-09-26
+
+*Priit:* Helped with researching the code and main ball mover and carrier. (2h) +
+*Artur:* Polished our ball detection software. Started developing the moving based on the closest balls x coordinate. (2h) +
+*Kaspar:* Updated Project manager excel file, attached the NUC with screws to the test robot. Also photographed our accomplishments.  (2h) +
+
+
 
 
 
