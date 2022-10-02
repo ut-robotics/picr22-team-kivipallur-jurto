@@ -71,14 +71,14 @@ NumPy - https://numpy.org/ +
 *Artur:* Polished our ball detection software. Started developing the moving based on the closest balls x coordinate. (2h) +
 *Kaspar:* Updated Project manager excel file, attached the NUC with screws to the test robot. Also photographed our accomplishments.  (2h) +
 
+
 === Wednesday 2022-09-28
 
 *Artur:* Worked on robot movement. (2h) +
 
 === Thursday 2022-09-29
-
-*Priit:* Fixed broken vnc. (2h) + 
-*Kaspar:* Worked on presentation slides, charged lipo batteries and helped Priit. (2h) + 
+*Priit:* Broke the VNC Viewer tried different programs, but ended up back at VNC Viewer. (4h) +
+*Kaspar:* Assisted with research on VNC Viewers. Worked on presentation slides, charged lipo batteries  (2h) +
 
 
 === Sunday 2022-03-02
