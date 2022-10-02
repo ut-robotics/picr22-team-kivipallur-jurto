@@ -81,7 +81,7 @@ NumPy - https://numpy.org/ +
 *Kaspar:* Assisted with research on VNC Viewers. Worked on presentation slides, charged lipo batteries  (2h) +
 
 
-=== Sunday 2022-03-02
+=== Sunday 2022-10-02
 *Priit:* reviewed the slides. (1h) +
 *Kaspar:* reviewed the slides. (1h) +
 *Artur:* reviewed the slides. (1h) +
