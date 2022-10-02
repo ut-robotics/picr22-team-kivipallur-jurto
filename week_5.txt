@@ -1,3 +1,10 @@
 26.09.2022
 Kinitasime nuk arvuti roboti külge ja jätkasime palli tuvastuse
 korikeerimist. Saime tagasisitet oma viskaja kohta.
+
+29.09.2022
+Parandasime katkist VNC protokolli. töötasime slaidide kallal, 
+laadisime täis tühjad akkud
+
+02.10.2022
+Vaatasime üle salidid ja täiustasime
