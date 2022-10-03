@@ -89,7 +89,7 @@ NumPy - https://numpy.org/ +
 
 
 === Monday 2022-10-03
-*Madis:* Resolved some issues with Fusion 360 CAM and waiting for supervision. (1h) +
+*Madis:* Resolved 2D Pocket and Contour issues with Fusion 360 CAM and waiting for supervision. (1h) +
 
 
 
