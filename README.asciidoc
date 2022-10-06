@@ -91,6 +91,9 @@ NumPy - https://numpy.org/ +
 === Monday 2022-10-03
 *Madis:* Resolved 2D Pocket and Contour issues with Fusion 360 CAM. Got positive feedback and milled the details. Presented the project status (5h) +
 
+=== Thursday 2022-10-6
+*Priit:* coded an alpha version of the code to track and follow the ball. (4h) +
+*Artur:* helped to code and test the track and follow code.(2h) +
 
 
 
