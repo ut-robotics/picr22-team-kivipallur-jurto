@@ -94,6 +94,6 @@ NumPy - https://numpy.org/ +
 === Thursday 2022-10-6
 *Priit:* coded an alpha version of the code to track and follow the ball. (4h) +
 *Artur:* helped to code and test the track and follow code.(2h) +
-
+*Madis:* Modified robot and thrower, finally assembled thrower as well. (3h) +
 
 
