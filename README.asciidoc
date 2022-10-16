@@ -107,9 +107,9 @@ NumPy - https://numpy.org/ +
 *Artur:* Worked on the robot motion program. (3h) +
 
 === Thursday 2022-10-13
-*Priit:* Worked on the robot motion program and filmd robat mooving in the game fild. (3h) +
-*Kaspar:* Worked on slaids and projekt plan, helpt Priit do debug motion program. (3h) + 
-*Madis:* Worked on robat weel desain. (3h) +
+*Priit:* Worked on the robot motion program and filmed robot moving in the field. (3h) +
+*Kaspar:* Worked on slides and project plan, helped Priit debug the motion program. (3h) + 
+*Madis:* Worked on the robot's wheel design. (3h) +
 
 === Sunday 2022-10-02
 *Priit:* reviewed the slides. (1h) +
