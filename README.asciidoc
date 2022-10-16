@@ -98,5 +98,21 @@ NumPy - https://numpy.org/ +
 *Priit:* coded an alpha version of the code to track and follow the ball. (4h) +
 *Artur:* helped to code and test the track and follow code.(2h) +
 *Madis:* Modified robot and thrower, finally assembled thrower as well. (3h) +
+*Kaspar:* Looking pcb components for Altium. (2h) + 
 
+=== Friday 2022-10-7
+*Kaspar:* Worked on motor driver and controller pcb schematic. (7h) +
 
+=== Monday 2022-10-10
+*Artur:* Worked on the robot motion program. (3h) +
+
+=== Thursday 2022-10-13
+*Priit:* Worked on the robot motion program and filmd robat mooving in the game fild. (3h) +
+*Kaspar:* Worked on slaids and projekt plan, helpt Priit do debug motion program. (3h) + 
+*Madis:* Worked on robat weel desain. (3h) +
+
+=== Sunday 2022-10-02
+*Priit:* reviewed the slides. (1h) +
+*Kaspar:* reviewed the slides. (1h) +
+*Artur:* reviewed the slides. (1h) +
+*Madis:* reviewed the slides. (1h) +
