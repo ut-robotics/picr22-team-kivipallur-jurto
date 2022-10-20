@@ -116,3 +116,7 @@ NumPy - https://numpy.org/ +
 *Kaspar:* reviewed the slides. (1h) +
 *Artur:* reviewed the slides. (1h) +
 *Madis:* reviewed the slides. (1h) +
+
+=== Thursday 2022-10-13
+*Madis:* Finished disaining omniwheels and waiting for feedback. (4h) +
+
