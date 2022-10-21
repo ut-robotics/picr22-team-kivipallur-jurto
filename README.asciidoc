@@ -117,6 +117,8 @@ NumPy - https://numpy.org/ +
 *Artur:* reviewed the slides. (1h) +
 *Madis:* reviewed the slides. (1h) +
 
-=== Thursday 2022-10-13
-*Madis:* Finished disaining omniwheels and waiting for feedback. (4h) +
+=== Thursday 2022-10-20
+*Madis:* Finished designing omniwheels and waiting for feedback. (4h) +
 
+=== Friday 2022-10-21
+*Madis:* Designed motor mounts and created assembly with omniwheel, motor holder and motor. (2h) +
