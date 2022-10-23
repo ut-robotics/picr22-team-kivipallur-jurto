@@ -1,40 +1,25 @@
 import image_processor
 import camera
-import MovementPriit #Priidu sekeldis
-import motion
+import MainMovement
 import cv2
 import time
-import serial
+from enum import Enum
+
+basketcolor = 'b'
+movementState = MainMovement.stateMachine()
+motion = MainMovement.RobotMotion()
 
 def main_loop():
-    #xlist = []
-    ylist = []
 
-
+    current_state = 0
     debug = True
-    #Priidu sekeldis
-    
-    #Priidu sekeldis
-    motion_sim = motion.TurtleRobot()
-    motion_sim2 = motion.TurtleOmniRobot()
-    #priidusekeldis
-    gmove = MovementPriit.RobotMotion()
-    #priidu sekeldis
-
-    
-    
-    #camera instance for normal web cameras
-    #cam = camera.OpenCVCamera(id = 2)
-    # camera instance for realsense cameras
     cam = camera.RealsenseCamera(exposure = 100)
     
     processor = image_processor.ImageProcessor(cam, debug=debug)
-
-    gmove.open()
-    print("Works meaybe")
+    
+    motion.__init__()
+    motion.open()
     processor.start()
-    motion_sim.open()
-    motion_sim2.open()
 
     start = time.time()
     fps = 0
@@ -68,16 +53,20 @@ def main_loop():
                 if k == ord('q'):
                     break
             
+            if current_state == 0:
+                current_state = movementState.spin(processedData)
+            elif current_state == 1:
+                current_state = movementState.drive(processedData)
+            elif current_state == 2:
+                current_state = movementState.orbit(processedData,basketcolor)
+            elif current_state == 3:
+                current_state = movementState.throw(processedData)
+
     except KeyboardInterrupt:
         print("closing....")
     finally:
-        #Priidu sekeldis
-        
-        #Priidu sekeldis
         cv2.destroyAllWindows()
-        gmove.close()
+        motion.close()
         processor.stop()
-        motion_sim.close()
-        motion_sim2.close()
 
 main_loop()
