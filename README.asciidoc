@@ -125,3 +125,8 @@ NumPy - https://numpy.org/ +
 
 === Sunday 2022-10-23
 *Artur:* Worked on the movement and image processing parts of the code. (3h) +
+*Madis:* Fixed issues with motor mounts. (1h) +
+
+=== Monday 2022-10-24
+*Madis:* Used lathe to make three aluminum motor mounts. Next step is to clean them and drill holes. (4h) +
+
