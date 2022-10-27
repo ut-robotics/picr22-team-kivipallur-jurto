@@ -128,10 +128,11 @@ NumPy - https://numpy.org/ +
 *Madis:* Fixed issues with motor mounts. (1h) +
 
 === Monday 2022-10-24
-*Madis:* Used lathe to make three aluminum motor mounts. Next step is to clean them and drill holes. (4h) +
-*Artur:* Improved our state machine code.
-*Priit:* Did some coding.
-*Kaspar:* Helped Priit with coding.
+*Madis:* Used lathe to make three aluminum wheel-motor mounts. Next step is to clean them and drill holes. (4h) +
+*Artur:* Improved our state machine code. (3h) +
+*Priit:* Did some coding. (2h) +
+*Kaspar:* Helped Priit with coding. (2h) +
 
 === Wednesday 2022-10-26
-*Priit:* Struggled with classes and serial. (5h)
+*Priit:* Struggled with classes and serial. (5h) +
+*Madis:* Finished wheel-motor mounts. (2h) +
