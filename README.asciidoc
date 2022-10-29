@@ -111,21 +111,29 @@ NumPy - https://numpy.org/ +
 *Kaspar:* Worked on slides and project plan, helped Priit debug the motion program. (3h) + 
 *Madis:* Worked on the robot's wheel design. (3h) +
 
-=== Sunday 2022-10-02
+=== Sunday 2022-10-16
 *Priit:* reviewed the slides. (1h) +
 *Kaspar:* reviewed the slides. (1h) +
 *Artur:* reviewed the slides. (1h) +
 *Madis:* reviewed the slides. (1h) +
+
+=== Monday 2022-10-17
+*Priit:* Presented the project status. Did some coding. (4h) +
+*Kaspar:* Presented the project status. Prepared the robot for the test robot presentation. (4h) +
+*Artur:* Presented the project status. Did some coding. (4h) +
+*Madis:* Presented the project status. Prepared the robot for the test robot presentation. (4h) +
 
 === Thursday 2022-10-20
 *Madis:* Finished designing omniwheels and waiting for feedback. (4h) +
 
 === Friday 2022-10-21
 *Madis:* Designed motor mounts and created assembly with omniwheel, motor holder and motor. (2h) +
+*Kaspar:* Worked on motor driver and controller pcb schematic. (4h) +
 
 === Sunday 2022-10-23
 *Artur:* Worked on the movement and image processing parts of the code. (3h) +
 *Madis:* Fixed issues with motor mounts. (1h) +
+*Kaspar:* Worked on motor driver and controller pcb schematic. (8h) +
 
 === Monday 2022-10-24
 *Madis:* Used lathe to make three aluminum wheel-motor mounts. Next step is to clean them and drill holes. (4h) +
@@ -136,3 +144,4 @@ NumPy - https://numpy.org/ +
 === Wednesday 2022-10-26
 *Priit:* Struggled with classes and serial. (5h) +
 *Madis:* Finished wheel-motor mounts. (2h) +
+*Kaspar:* Experimented with the robot's ball throwing ability. (1h)+
