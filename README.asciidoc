@@ -145,3 +145,15 @@ NumPy - https://numpy.org/ +
 *Priit:* Struggled with classes and serial. (5h) +
 *Madis:* Finished wheel-motor mounts. (2h) +
 *Kaspar:* Experimented with the robot's ball throwing ability. (1h)+
+
+=== Thursday 2022-10-27
+*Priit:* Got the serial working and ironed out classes issue. (2h) +
+*Artur:* Helped with debugging our issues. (2h) +
+
+=== Friday 2022-10-28
+*Priit:* Implemented primitive orbit and throwing functions. (4h) +
+
+=== Saturday 2022-10-29
+*Priit:* Improved orbit function. Also implemented depth camera distance. Fixed bugs (2h) +
+
+
