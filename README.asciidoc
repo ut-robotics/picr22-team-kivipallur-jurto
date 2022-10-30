@@ -152,8 +152,15 @@ NumPy - https://numpy.org/ +
 
 === Friday 2022-10-28
 *Priit:* Implemented primitive orbit and throwing functions. (4h) +
+*Kaspar:* Worked on motor driver and controller pcb schematic. (4h) +
 
 === Saturday 2022-10-29
 *Priit:* Improved orbit function. Also implemented depth camera distance. Fixed bugs (2h) +
+*Kaspar:* Worked on motor driver and controller pcb schematic. (4h) +
 
+=== Sunday 2022-10-30
+*Priit:* reviewed the slides. (1h) +
+*Kaspar:* reviewed the slides. (1h) +
+*Artur:* reviewed the slides. (1h) +
+*Madis:* reviewed the slides.Fixed feedback points and started pcb design (6h) +
 
