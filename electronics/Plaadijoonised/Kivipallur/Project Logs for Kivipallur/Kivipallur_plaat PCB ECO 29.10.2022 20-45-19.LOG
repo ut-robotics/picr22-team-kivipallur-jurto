@@ -1,0 +1,10 @@
+Added Component: Designator=J8(USB)
+Added Pin To Net: NetName=+5V_USB Pin=J8-1
+Added Pin To Net: NetName=USB_D- Pin=J8-2
+Added Pin To Net: NetName=USB_D+ Pin=J8-3
+Added Pin To Net: NetName=GNDB1 Pin=J8-5
+Added Pin To Net: NetName=GNDB1 Pin=J8-SH
+Added Pin To Net: NetName=GNDB1 Pin=J8-SH
+Added Pin To Net: NetName=GNDB1 Pin=J8-SH
+Added Pin To Net: NetName=GNDB1 Pin=J8-SH
+Added Member To Class: ClassName=U_Kivipallur_joonis3 Member=Component J8 USB
