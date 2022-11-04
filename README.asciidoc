@@ -169,3 +169,6 @@ NumPy - https://numpy.org/ +
 
 === Thursday 2022-11-03
 *Madis:* Designed new thrower. (3h) +
+
+== Friday 2022-11-04
+*Madis:* Started with new robot design (3h) +
