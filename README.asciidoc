@@ -7,7 +7,7 @@ Kaspar Tamm +
 Priit Teelahk +
 
 == Fusion 360 Kivipallur Jürto
-https://gmail1315991.autodesk360.com/g/projects/20220905552789506/data/dXJuOmFkc2sud2lwcHJvZDpmcy5mb2xkZXI6Y28uQ0dDYnZVanRTcks1R1hwZVcyRlpBZw
+https://a360.co/3WzgNLS
 
 == External links
 Fusion 360 CAD - https://www.autodesk.com/products/fusion-360/overview?term=1-YEAR&tab=subscription +
@@ -172,3 +172,7 @@ NumPy - https://numpy.org/ +
 
 == Friday 2022-11-04
 *Madis:* Started with new robot design (3h) +
+
+== Sunday 2022-11-06
+*Madis:* Designed new robot upper plate and started to assemble new robot in Autocad (2h) +
+
