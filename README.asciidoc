@@ -169,10 +169,14 @@ NumPy - https://numpy.org/ +
 
 === Thursday 2022-11-03
 *Madis:* Designed new thrower. (3h) +
+*Priit:* Developed a badly hardcoded throwing code. (3h) +
 
 == Friday 2022-11-04
 *Madis:* Started with new robot design (3h) +
 
 == Sunday 2022-11-06
 *Madis:* Designed new robot upper plate and started to assemble new robot in Autocad (2h) +
+
+== Monday 2022-11-07
+*Priit:* Fixed the hardcoded throwing code and added plastic fangs to help ball alignment
 
