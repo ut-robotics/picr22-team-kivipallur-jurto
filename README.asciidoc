@@ -178,5 +178,8 @@ NumPy - https://numpy.org/ +
 *Madis:* Designed new robot upper plate and started to assemble new robot in Autocad (2h) +
 
 == Monday 2022-11-07
-*Priit:* Fixed the hardcoded throwing code and added plastic fangs to help ball alignment
+*Priit:* Fixed the hardcoded throwing code and added plastic fangs to help ball alignment (2h) +
+
+== Tuesday 2022-11-08
+*Madis:* Designed new robot. Added borders to bottom plate. (2h) +
 
