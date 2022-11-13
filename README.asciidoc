@@ -167,19 +167,50 @@ NumPy - https://numpy.org/ +
 *Artur:* reviewed the slides. (1h) +
 *Kaspar:* reviewed the slides.Fixed feedback points and started pcb design (6h) +
 
+=== Monday 2022-10-31
+*Priit:* Presented the project status. (2h) +
+*Kaspar:* Presented the project status. (2h) +
+*Artur:* Presented the project status. (2h) +
+*Madis:* Presented the project status. (2h) +
+
 === Thursday 2022-11-03
 *Madis:* Designed new thrower. (3h) +
 *Priit:* Developed a badly hardcoded throwing code. (3h) +
+*Artur:* Worked on the robot program. (3h) +
 
-== Friday 2022-11-04
+=== Friday 2022-11-04
 *Madis:* Started with new robot design (3h) +
+*Kaspar:* Worked on pcb schematic and implemented suggested fixes (4h) +
 
-== Sunday 2022-11-06
+=== Saturday 2022-11-05
+*Kaspar:* Worked on pcb schematic and implemented suggested fixes (5h) +
+
+=== Sunday 2022-11-06
 *Madis:* Designed new robot upper plate and started to assemble new robot in Autocad (2h) +
+*Kaspar:* Worked on pcb schematic and implemented suggested fixes (4h) +
 
-== Monday 2022-11-07
+=== Monday 2022-11-07
 *Priit:* Fixed the hardcoded throwing code and added plastic fangs to help ball alignment (2h) +
+*Kaspar:* Helped test the robot's ball throwing (2h) +
+*Artur:* Improved new code. (2h) +
 
-== Tuesday 2022-11-08
+=== Tuesday 2022-11-08
 *Madis:* Designed new robot. Added borders to bottom plate. (2h) +
 
+=== Thursday 2022-11-10
+*Priit:* Participated in the first test competition (5h) +
+*Madis:* Participated in the first test competition (5h) +
+*Artur:* Participated in the first test competition (5h) +
+*Kaspar:* Participated in the first test competition (5h) +
+
+=== Friday 2022-11-11
+*Kaspar:* Fixed feedback points and started pcb design (3h) +
+
+=== Saturday 2022-11-12
+*Kaspar:* Received schematic feedback and finalized the new component placement (4h)
+
+=== Sunday 2022-11-13
+*Priit:* reviewed the slides. (1h) +
+*Madis:* reviewed the slides. (1h) +
+*Artur:* reviewed the slides. (1h) +
+*Kaspar:* reviewed the slides. Improved component placement (4h) +
