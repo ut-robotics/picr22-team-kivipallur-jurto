@@ -215,3 +215,12 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Madis:* reviewed the slides. (1h) +
 *Artur:* reviewed the slides. (1h) +
 *Kaspar:* reviewed the slides. Improved component placement (4h) +
+
+=== Monday 2022-11-14
+*Priit:* presented progress (2h) +
+*Madis:* presented progress (2h) +
+*Artur:* presented progress (2h) +
+*Kaspar:* presented progress (2h) +
+
+=== Monday 2022-11-21
+*Madis:* Designed new robot. Need to add NUC (4h) +
