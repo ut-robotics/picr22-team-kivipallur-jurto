@@ -17,6 +17,7 @@ VNC Viewer/Server - https://www.realvnc.com/en/connect/download/viewer/ +
 OpenSSH - https://www.openssh.com/ +
 OpenCV - https://opencv.org/ +
 NumPy - https://numpy.org/ +
+Xbox360controller - https://pypi.org/project/xbox360controller/ +
 
 
 
