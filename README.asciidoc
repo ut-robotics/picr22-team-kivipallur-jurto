@@ -224,3 +224,6 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 
 === Monday 2022-11-21
 *Madis:* Designed new robot. Need to add NUC (4h) +
+
+=== Tuesday 2022-11-22
+*Madis:* Finished Designing new robot. Waiting for feedback (2h) +
