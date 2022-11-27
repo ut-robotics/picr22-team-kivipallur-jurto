@@ -241,7 +241,7 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Madis:* Finished Designing new robot. Waiting for feedback (2h) +
 
 === Wednesday 2022-11-23
-*Kaspar:* Received schematic feedback and Worked on pcb the design (4h) ´+
+*Kaspar:* Received schematic feedback and Worked on pcb the design (4h) +
 *Priit:* prepared the robot for the test competition (3h) +
 *Artur:* prepared the robot for the test competition (3h) +
 
