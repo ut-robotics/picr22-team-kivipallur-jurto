@@ -229,11 +229,11 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Kaspar:* Worked on pcb the design (2h) +
 
 === Saturday 2022-11-19
-*Kaspar:* Received schematic feedback and Worked on pcb the design (5h)
+*Kaspar:* Received schematic feedback and Worked on pcb the design (5h) +
 
 === Monday 2022-11-21
 *Madis:* Designed new robot. Need to add NUC (4h) +
-*Kaspar:* Received schematic feedback and Worked on pcb the design (4h)
+*Kaspar:* Received schematic feedback and Worked on pcb the design (4h) +
 *Priit:* Worked on the ref commands (3h) +
 *Artur:* Worked on the ref commands (3h) +
 
@@ -241,7 +241,7 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Madis:* Finished Designing new robot. Waiting for feedback (2h) +
 
 === Wednesday 2022-11-23
-*Kaspar:* Received schematic feedback and Worked on pcb the design (4h)
+*Kaspar:* Received schematic feedback and Worked on pcb the design (4h) ´+
 *Priit:* prepared the robot for the test competition (3h) +
 *Artur:* prepared the robot for the test competition (3h) +
 
@@ -251,10 +251,10 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Artur:* Participated in the first test competition (5h) +
 
 === Friday 2022-11-25
-*Kaspar:* Received schematic feedback and Worked on pcb the design (2h)
+*Kaspar:* Received schematic feedback and Worked on pcb the design (2h) +
 
 === Saturday 2022-11-26
-*Kaspar:* Prepared the pcb files to order the board (1h)
+*Kaspar:* Prepared the pcb files to order the board (1h) +
 
 === Sunday 2022-11-17
 *Priit:* reviewed the slides. (1h) +
