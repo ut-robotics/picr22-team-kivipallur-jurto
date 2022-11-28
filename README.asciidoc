@@ -256,7 +256,7 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 === Saturday 2022-11-26
 *Kaspar:* Prepared the pcb files to order the board (1h) +
 
-=== Sunday 2022-11-17
+=== Sunday 2022-11-27
 *Priit:* reviewed the slides. (1h) +
 *Madis:* reviewed the slides. (1h) +
 *Artur:* reviewed the slides. (1h) +
