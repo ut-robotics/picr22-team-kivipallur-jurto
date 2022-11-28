@@ -246,12 +246,12 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Artur:* prepared the robot for the test competition (3h) +
 
 === Thursday 2022-11-24
-*Priit:* Participated in the first test competition (5h) +
-*Madis:* Participated in the first test competition (2h) +
-*Artur:* Participated in the first test competition (5h) +
+*Priit:* Participated in the second test competition (5h) +
+*Madis:* Participated in the second test competition (2h) +
+*Artur:* Participated in the second test competition (5h) +
 
 === Friday 2022-11-25
-*Kaspar:* Received schematic feedback and Worked on pcb the design (2h) +
+*Kaspar:* Received schematic feedback and Worked on pcb design (2h) +
 
 === Saturday 2022-11-26
 *Kaspar:* Prepared the pcb files to order the board (1h) +
