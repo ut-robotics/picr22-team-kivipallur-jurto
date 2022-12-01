@@ -19,9 +19,6 @@ OpenCV - https://opencv.org/ +
 NumPy - https://numpy.org/ +
 Xbox360controller - https://pypi.org/project/xbox360controller/ +
 
-
-
-
 == Blog
 
 === Sunday 2022-09-04
@@ -261,5 +258,12 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Madis:* reviewed the slides. (1h) +
 *Artur:* reviewed the slides. (1h) +
 *Kaspar:* reviewed the slides. (1h) +
+
+=== Monday 2022-11-28
+*Madis:* Presented progress (2h) +
+*Kaspar:* Presented progress (2h) +
+
+=== Wednesday 2022-11-30
+*Madis:* 3D printed omni wheel and battery holder for testing (2h) +
 
 
