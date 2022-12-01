@@ -267,4 +267,4 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Madis:* 3D printed omni wheel and battery holder for testing (2h) +
 
 === Thursday 2022-12-1
-*Madis:* Created CAM for milling new robot. (1h) +
+*Madis:* Created CAM for milling new robot. Got feedback and milled new robot (5h) +
