@@ -80,11 +80,9 @@ class ImageProcessor():
         contours, hierarchy = cv2.findContours(t_balls, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         balls = []
-
         for contour in contours:
 
-            # ball filtering logic goes here. Example includes filtering by size and an example how to get pixels from
-            # the bottom center of the fram to the ball
+            
 
             size = cv2.contourArea(contour)
 
@@ -100,8 +98,37 @@ class ImageProcessor():
             obj_y = int(y + (h/2))
             obj_dst = obj_y
 
-            if obj_y > 30:
-            #if True:
+#black detection
+
+            if (obj_x -2) > 1:
+                x1 = (obj_x -2)
+            else:
+                x1 = 0
+            
+            if (obj_x +2) < self.camera.rgb_width-2:
+                x2 = (obj_x +2)
+            else:
+                x2 = self.camera.rgb_width -1
+
+            y1 = obj_y
+
+            if (obj_y + 40) < self.camera.rgb_height-40:
+                y2 = (obj_y + 40)
+            else:
+                y2 = self.camera.rgb_height -1
+            black_count = 0
+
+            for x in range(x1,x2):
+                for y in range(y1,y2):
+                    if fragments[y][x] == 6: #for black
+                        black_count += 1
+            #print(f"black pixels: {black_count}")
+            
+
+#black detection
+
+            if obj_y > 30 and black_count < 10:
+                
                 balls.append(Object(x = obj_x, y = obj_y, size = size, distance = obj_dst, exists = True))
 
                 if self.debug:
@@ -130,7 +157,7 @@ class ImageProcessor():
 
             obj_x = int(x + (w/2))
             obj_y = int(y + (h/2))
-            obj_dst = obj_y
+            obj_dst = round(100*(self.camera.pixel_distance(obj_x,obj_y)))
 
             baskets.append(Object(x = obj_x, y = obj_y, size = size, distance = obj_dst, exists = True))
 

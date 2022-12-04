@@ -5,6 +5,7 @@ import MainMovement
 import cv2
 import time
 import ref_commands
+from Color import Color
 
 motion = MainMovement.RobotMotion()
 
@@ -22,7 +23,7 @@ def main_loop():
     current_state = MainMovement.States.spin
 
     #class call from other files
-    movementState = MainMovement.StateMachine(motion)
+    movementState = MainMovement.StateMachine(motion,cam.rgb_width,cam.rgb_height)
     processor = image_processor.ImageProcessor(cam, debug=debug)
     
     #opening all that needs to be opened
@@ -50,15 +51,9 @@ def main_loop():
             
             if msg is not None and msg['signal'] == 'start':
                 if msg["targets"][0] == robotID:
-                    if msg["baskets"][0] == "blue":
-                        basketcolor = 'b'
-                    else:
-                        basketcolor = 'm'
+                    basketcolor = Color.BLUE if msg["baskets"][0] == "blue" else Color.MAGENTA
                 else:
-                    if msg["baskets"][1] == "blue":
-                        basketcolor = 'b'
-                    else: 
-                        basketcolor = 'm'
+                    basketcolor = Color.BLUE if msg["baskets"][1] == "blue" else Color.MAGENTA
                 status = True
             elif msg is not None and msg['signal'] == 'stop':
                 status = False
@@ -97,10 +92,7 @@ def main_loop():
                 elif current_state == MainMovement.States.orbit:
                     current_state = movementState.orbit(processedData,basketcolor)
                 elif current_state == MainMovement.States.throw:
-                    basket = processedData.basket_b if basketcolor == 'b' else processedData.basket_m
-                    if basket.exists:
-                        basketdistcm = round(100*(cam.pixel_distance(basket.x,basket.y)))
-                    current_state = movementState.throw(processedData,basketcolor,basketdistcm)
+                    current_state = movementState.throw(processedData,basketcolor)
             #print(current_state)
             
 

@@ -3,11 +3,15 @@ import multiprocessing as mp
 import websocket as wsc
 import numpy as np
 
+#
+#This code is inspired from Team OWO-s referee commands.
+#
+
 class Referee_cmd_client:
     def __init__(self):
         #ip and port
-        self.ip = "192.168.3.220"
-        self.port = "8111"
+        self.ip = "192.168.3.69"
+        self.port = "8222"
 
         #define queue
         self.queue = mp.Queue()
@@ -23,6 +27,7 @@ class Referee_cmd_client:
         self.process.join() #waiting for process to finish and closing websocket
         self.ws.close()
 
+    #from this point on, we got help from team OWO:
     def connect(self):
         for i in range(5): #trying to connect 5 times
             try:
