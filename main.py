@@ -6,15 +6,25 @@ import cv2
 import time
 import ref_commands
 from Color import Color
+from xbox360controller import Xbox360Controller
+
 
 motion = MainMovement.RobotMotion()
 
 def main_loop():
 
+    basketcolor = Color.BLUE # if no referee command is received we use this
+
     debug = False   #Whether or not to show the debug frame
 
     referee = ref_commands.Referee_cmd_client()
     cam = camera.RealsenseCamera(exposure = 100)
+
+    try:
+        controller = Xbox360Controller(0, axis_threshold=0.2)  #if controller is active while main is started use controller else ignore controller
+        controller_connected = True
+    except:
+        controller_connected = False
 
     #robotid for referee
     robotID = "jurto"
@@ -57,7 +67,21 @@ def main_loop():
                 status = True
             elif msg is not None and msg['signal'] == 'stop':
                 status = False
-            # has argument aligned_depth that enables depth frame to color frame alignment. Costs performance
+            
+
+            if(controller_connected): #checks if we had a controller
+                if (controller.button_a.is_pressed):                    #switch between controller and normal
+                    if current_state == MainMovement.States.controller:
+                        current_state = MainMovement.States.spin
+                        status = 1                              
+                    else:
+                        current_state = MainMovement.States.controller
+                        status = 1
+
+                if (controller.button_b.is_pressed): #listen to ref commands if b is pressed and disconnects controller
+                    status = 0
+                    controller_connected = False
+
             
             #processed data list which we use for movement
             processedData = processor.process_frame(aligned_depth=False)
@@ -93,6 +117,8 @@ def main_loop():
                     current_state = movementState.orbit(processedData,basketcolor)
                 elif current_state == MainMovement.States.throw:
                     current_state = movementState.throw(processedData,basketcolor)
+                elif current_state == MainMovement.States.controller:
+                    current_state == movementState.controller(controller)
             #print(current_state)
             
 

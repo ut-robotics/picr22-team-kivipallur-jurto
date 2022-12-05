@@ -4,13 +4,13 @@ import websocket as wsc
 import numpy as np
 
 #
-#This code is inspired from Team OWO-s referee commands.
+#This code is inspired from Team OWO-s referee commands. https://github.com/ut-robotics/picr22-team-owo
 #
 
 class Referee_cmd_client:
     def __init__(self):
         #ip and port
-        self.ip = "192.168.3.69"
+        self.ip = "192.168.3.69" 
         self.port = "8222"
 
         #define queue

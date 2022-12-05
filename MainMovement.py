@@ -11,6 +11,8 @@ from enum import Enum
 from json import loads
 from Color import Color
 
+
+
 class RobotMotion:
     wheelRadius = 0.035  
     wheelDistanceFromCenter = 0.2 
@@ -63,6 +65,7 @@ class States(Enum):
     orbit = 2
     throw = 3
     read_ref = 4
+    controller = 5
 
 
 class StateMachine():
@@ -155,3 +158,16 @@ class StateMachine():
             self.motion.move(0, 0.2, 0, thrower_speed) # hardcoded throw
             time.sleep(0.3)
         return States.spin
+
+
+    
+
+    def controller(self,controller):
+
+        throwerspeed = round(controller.trigger_r.value *1900)
+        print(throwerspeed)
+        yspeed = controller.axis_l._value_y *-0.9
+        xspeed = controller.axis_l._value_x *0.5
+
+        rotate = controller.axis_r._value_x *-0.75
+        self.motion.move(xspeed,yspeed,rotate,throwerspeed)
