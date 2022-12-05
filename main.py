@@ -21,7 +21,7 @@ def main_loop():
     cam = camera.RealsenseCamera(exposure = 100)
 
     try:
-        controller = Xbox360Controller(0, axis_threshold=0.2)  #if controller is active while main is started use controller else ignore controller
+        controller = Xbox360Controller(0, axis_threshold=0.2)
         controller_connected = True
     except:
         controller_connected = False
@@ -67,18 +67,18 @@ def main_loop():
                 status = True
             elif msg is not None and msg['signal'] == 'stop':
                 status = False
-            
-
-            if(controller_connected): #checks if we had a controller
-                if (controller.button_a.is_pressed):                    #switch between controller and normal
+            # has argument aligned_depth that enables depth frame to color frame alignment. Costs performance
+            print(controller_connected)
+            if(controller_connected):
+                if (controller.button_a.is_pressed):
                     if current_state == MainMovement.States.controller:
                         current_state = MainMovement.States.spin
-                        status = 1                              
+                        status = 1
                     else:
                         current_state = MainMovement.States.controller
                         status = 1
 
-                if (controller.button_b.is_pressed): #listen to ref commands if b is pressed and disconnects controller
+                if (controller.button_b.is_pressed):
                     status = 0
                     controller_connected = False
 
