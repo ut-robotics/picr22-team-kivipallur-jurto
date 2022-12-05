@@ -268,3 +268,6 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 
 === Thursday 2022-12-1
 *Madis:* Created CAM for milling new robot. Got feedback and milled new robot (5h) +
+
+=== Monday 2022-12-5
+*Madis:* Assembled new robot chassis. Need to 3D print one more omni wheel. (4h) +
