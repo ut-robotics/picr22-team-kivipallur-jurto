@@ -265,9 +265,24 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 
 === Wednesday 2022-11-30
 *Madis:* 3D printed omni wheel and battery holder for testing (2h) +
+*Priit:* Learned how to use github encryption keys (1h) +
 
 === Thursday 2022-12-1
 *Madis:* Created CAM for milling new robot. Got feedback and milled new robot (5h) +
+*Priit:* Added code for controller integration (4h) +
 
 === Monday 2022-12-5
 *Madis:* Assembled new robot chassis. Need to 3D print one more omni wheel. (4h) +
+*Priit:* fixed issues with code (3h) +
+  
+=== Wednesday 2022-12-7
+*Priit:* tested code on new robot, and tried coding firmware (6h) +
+*Artur:* tested code on new robot, and tried coding firmware (6h) +
+*Madis:* Assembled new robot (3h) +
+*Kaspar:* Soldered our electronics (14h) +
+
+=== Thursday 2022-12-8
+*Priit:* tried writing a patrol function and wrote line detection kinda also participated in test competition (8h) +
+*Madis:* fixed robot wheel and camera mount also participated in test competition (4h) +
+*Artur:* thresholded and helped debugging and fix code also participated in test competition (5h)+
+*Kaspar:* Added 3d printed electronics protection shell (3h) +
