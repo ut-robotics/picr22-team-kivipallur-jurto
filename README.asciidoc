@@ -284,5 +284,5 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 === Thursday 2022-12-8
 *Priit:* tried writing a patrol function and wrote line detection kinda also participated in test competition (8h) +
 *Madis:* fixed robot wheel and camera mount also participated in test competition (4h) +
-*Artur:* thresholded and helped debugging and fix code also participated in test competition (5h)+
+*Artur:* thresholded and helped debugging and fix code also participated in test competition (5h) +
 *Kaspar:* Added 3d printed electronics protection shell (3h) +
