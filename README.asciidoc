@@ -292,7 +292,7 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Kaspar:* Added 3d printed electronics protection shell (3h) +
 
 === Saturday 2022-12-10
-Kaspar:* Worked on firmware  (5h) +
+*Kaspar:* Worked on firmware  (5h) +
 
 === Sunday 2022-12-11
 *Priit:* reviewed the slides. (1h) +
