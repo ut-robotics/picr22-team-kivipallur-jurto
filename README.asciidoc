@@ -299,3 +299,10 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Madis:* reviewed the slides. (1h) +
 *Artur:* reviewed the slides. (1h) +
 *Kaspar:* reviewed the slides and Worked on firmware . (3h) +
+
+=== Monday 2022-12-12
+*Priit:* optimized robot movement (5h) +
+*Madis:* fixed robot thrower intake problems (5h) +
+*Kaspar:* debugged our firmware (5h) +
+*Artur:* helped with coding (2h) +
+
