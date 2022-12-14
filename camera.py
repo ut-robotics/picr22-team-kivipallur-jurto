@@ -79,7 +79,6 @@ class RealsenseCamera(ICamera):
         return np.asanyarray(frames.get_color_frame().get_data()), np.asanyarray(frames.get_depth_frame().get_data())
     
 
-
 # resolution numbers are sensitive with openCV. Implement a resolution setting mechanism here or use the default of the webcam to
 # get a more robust solution
 class OpenCVCamera(ICamera):
