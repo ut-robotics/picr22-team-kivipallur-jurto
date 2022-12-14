@@ -1,21 +1,31 @@
 # from logging.handlers import WatchedFileHandler
 import math
+from urllib import robotparser
 import numpy as np
-import struct 
+import time
+import struct
 import serial
+import websocket
 import serial.tools.list_ports as serials
-#import scipy.optimize as opt
 from enum import Enum
+from json import loads
+from Color import Color
+from xbox360controller import Xbox360Controller
+
+
 
 class RobotMotion:
-    wheelRadius = 0.035 #needs to be remeasured
-    wheelDistanceFromCenter = 0.2 #needs to be remeasured
+    wheelRadius = 0.035  
+    wheelDistanceFromCenter = 0.2 
     gearboxReductionRatio = 18.75
     encoderEdgesPerMotorRevolution = 64
     pidControlFrequency = 100
     thrower_speed = 00
-    wheelSpeedToMainboardUnits = gearboxReductionRatio * encoderEdgesPerMotorRevolution / (2 * math.pi * wheelRadius * pidControlFrequency)
-    wheelAngles = [math.radians(degree) for degree in [120,0,240]] #converts wheel angles from degrees to radians
+    wheelSpeedToMainboardUnits = gearboxReductionRatio * \
+        encoderEdgesPerMotorRevolution / \
+        (2 * math.pi * wheelRadius * pidControlFrequency)
+    # converts wheel angles from degrees to radians
+    wheelAngles = [math.radians(degree) for degree in [120, 0, 240]]
     disable_failsafe = 0
 
     def __init__(self):
@@ -29,87 +39,180 @@ class RobotMotion:
                 break
         if self.ser == None:
             raise Exception("Could not establish serial connection")
-        
+
     def close(self):
+        print("sulgesin seriali")
         self.ser.close()
 
-    def move(self, x_speed, y_speed, robotAngularVelocity):
+    def sendCommand(self, thrower_speed, speed1, speed2, speed3):
+        self.ser.write(struct.pack('<hhhHBH', speed1, speed2, speed3, thrower_speed, self.disable_failsafe, 0xAAAA))
+        # reads as many bytes as there are to read
+        self.ser.read(self.ser.in_waiting)
+
+    def move(self, x_speed, y_speed, robotAngularVelocity, thrower_speed):
         robotSpeed = math.sqrt(x_speed * x_speed + y_speed * y_speed)
         robotDirectionAngle = math.atan2(y_speed, x_speed)
-        wheelSpeeds = [robotSpeed * math.cos(robotDirectionAngle - angle) + self.wheelDistanceFromCenter * robotAngularVelocity for angle in self.wheelAngles]
+        wheelSpeeds = [robotSpeed * math.cos(robotDirectionAngle - angle) +
+                       self.wheelDistanceFromCenter * robotAngularVelocity for angle in self.wheelAngles]
         wheelSpeedsInMainboardUnits = [round(speed*self.wheelSpeedToMainboardUnits) for speed in wheelSpeeds]
-        thrower_speed = 0 #temporary
-        print(wheelSpeedsInMainboardUnits)
-        self.sendCommand(thrower_speed,*wheelSpeedsInMainboardUnits)
-        
-    def sendCommand(self,thrower_speed,speed1,speed2,speed3):
-        self.ser.write(struct.pack('<hhhHBH', speed1, speed2, speed3, thrower_speed, self.disable_failsafe, 0xAAAA))
-        self.ser.read(self.ser.in_waiting) #reads as many bytes as there are to read
+        # thrower_speed = 0 #temporary
+        # print(wheelSpeedsInMainboardUnits)
+        self.sendCommand(thrower_speed, wheelSpeedsInMainboardUnits[0], wheelSpeedsInMainboardUnits[1], wheelSpeedsInMainboardUnits[2])
 
-    
-class states(Enum):
+
+class States(Enum):
     spin = 0
     drive = 1
     orbit = 2
     throw = 3
+    controller = 4
+    enemy_basket_spin = 5
+    enemy_basket_approach = 6
 
 
-class stateMachine:
-    def spin(self,processedData):
-        while True:
-            #if it finds more than 1 balls (2) to choose from, it goes to the drive function
-            if len(processedData.balls) > 1:
-                return states.drive.value
-            else:
-                #otherwise it spins until it finds some
-                RobotMotion.move(RobotMotion,0,0,0.2)
+class StateMachine():
+    def __init__(self, motion, frame_width, frame_height):
+        self.motion = motion
+        self.frame_centre_x = frame_width/2
+        self.frame_height = frame_height
 
+    def spin(self, processedData,timeoutframes):
+        if timeoutframes > 500:
+            return States.enemy_basket_spin
 
-    def drive(self,processedData):
-        while True:
-            if len(processedData.balls) > 0:
-                ball = processedData.balls[0] 
-                print("distance: {}".format(ball))
-                xmiddif = (460 - (ball.x)) * 0.001
-                yfor = (300 - (ball.distance)) * 0.002
-                print("x: ",xmiddif,", y: ",yfor)
-                RobotMotion.move(RobotMotion,0,yfor,xmiddif)
-                #if it is close enough to a ball, it should start orbiting around it to find the basket:
-                if ball.distance <= 270:
-                    return states.orbit.value
-            #if it loses the ball for some reason (opponent takes it), it starts spinning to look for a new one:
-            else: 
-                return states.spin.value
+        # if it finds more than 1 ball to choose from, it goes to the drive function
+        if len(processedData.balls) > 0:
+            #print(processedData.balls)
+            return States.drive
+        else:
+            # otherwise it spins until it finds some
+            self.motion.move(0, 0, 1, 0)
+        return States.spin
 
-    def orbit(self,processedData,basketColor):
-        basket = processedData.basket_b if basketColor == 'b' else processedData.basket_m
-        frame_centre_x = 848/2
-        while True:
-            if len(processedData.balls) > 0:
-                #if it has a basket in frame and it is centred, it goes to throw the ball:
-                if basket.exists and frame_centre_x - 10 < basket.x < frame_centre_x + 10:
-                    return states.throw.value
-                #if it has a ball and a basket in frame, but the basket isn't centred:
-                elif basket.exists:
-                    RobotMotion.move(RobotMotion,0.1,0,0.1)
-                    #centre basket to frame
-                #if it can't find a basket in the frame, it orbits faster:
-                elif not basket.exists:
-                    RobotMotion.move(RobotMotion,0.3,0,0.3)
-            #if it lost the ball, it goes to look for a new one:
-            else:
-                return states.spin.value
+    def drive(self, processedData):
+        if len(processedData.balls) > 0:
+            ball = processedData.balls[-1]
+            #print("distance: {}".format(ball))
+            xmiddif = (self.frame_centre_x - (ball.x)) * 0.0075              #approcing ball relative to the ball's x and y coordinate
+            yfor = (self.frame_height*0.75 - (ball.distance)) * 0.005
+            #print("x: ", xmiddif, ", y: ", yfor)
+            self.motion.move(0, yfor, xmiddif, 0)
+            if ball.distance >= self.frame_height*0.73:
+                # if it is close enough to a ball, it should start orbiting around it to find the basket:
+                return States.orbit
+        # if it loses the ball for some reason (opponent takes it), it starts spinning to look for a new one:
+        else:
+            return States.spin
+        return States.drive
 
-    # def SizeToDistance(basket_size, a, b):
-    #     return a/(basket_size-b)
-    
-    def throw(self,processedData):
-        # X = [] #size in px
-        # Y = [] #distance in mm
-        # x_data_fit = np.linspace(min(X),max(X),100)
-        # y_data_fit = self.SizeToDistance()
-        # optimized_params, pcov = opt.curve_fit(
+    def orbit(self, processedData, basketColor):
         
-        # )
-        thrower_speed = 500
-        RobotMotion.sendCommand(thrower_speed,0,1,0)
+        basket = processedData.basket_b if basketColor == Color.BLUE else processedData.basket_m
+
+        if len(processedData.balls) > 0 : #checks if robot can see ball
+            ball = processedData.balls[-1]
+            orbitrad = (self.frame_height*0.95 - ball.distance) *0.004
+            orbitvar = (self.frame_centre_x - ball.x )*0.02 #variable
+            
+            orbitdirmultiplier = 1 #used to assign the direction of orbit
+           
+            pixel_difference = 2
+            # if it has a basket in frame and it is centred, it goes to throw the ball:
+            if basket.exists and self.frame_centre_x -pixel_difference  < basket.x < self.frame_centre_x + pixel_difference +1:
+
+                print("could throw")
+                return States.throw
+            # if it has a ball and a basket in frame, but the basket isn't centred:
+            elif basket.exists:
+                orbitdirmultiplier = (self.frame_centre_x - basket.x)*0.002
+                #print(orbitdirmultiplier)
+                if orbitdirmultiplier > 0.1:
+                    orbitdirmultiplier = 0.1
+                elif orbitdirmultiplier < -0.1:
+                    orbitdirmultiplier = -0.1
+
+
+                self.motion.move(orbitdirmultiplier, orbitrad, orbitvar, 0)
+                # centre basket and ball to frame
+            # if it can't find a basket in the frame, it orbits faster:
+            elif not basket.exists:
+
+                self.motion.move(0.3, orbitrad, orbitvar, 0)
+        # if it lost the ball, it goes to look for a new one:
+        else:
+            return States.spin
+        return States.orbit
+
+
+    def throw(self, processedData,basketColor):
+
+        basket = processedData.basket_b if basketColor == Color.BLUE else processedData.basket_m
+        thrower_speed = round(3.2*basket.distance) + 340 # Semi accurate thrower speed calculation based on testing
+        #thrower_speed = 800
+        print(basket.distance, thrower_speed)
+        if len(processedData.balls) > 0:
+            ball = processedData.balls[-1]
+            xmiddif = (self.frame_centre_x -10 -  (basket.x)) * 0.003  #proportional driving
+            
+            self.motion.move(0, 0.3, xmiddif, thrower_speed) #thrower speed for revving the motor
+            
+            if ball.distance >= self.frame_height*0.58:
+                return States.throw
+
+        for n in range(5):
+            self.motion.move(0, 0.2, 0, thrower_speed) # hardcoded throw
+            time.sleep(0.3)
+        return States.spin
+
+
+    
+
+    def controller(self,controller):
+        print("im here")
+        throwerspeed = round(controller.trigger_r.value *1900)
+        print(throwerspeed)
+        yspeed = controller.axis_l._value_y *-0.9
+        xspeed = controller.axis_l._value_x *0.5
+
+        rotate = controller.axis_r._value_x *-0.75
+        self.motion.move(xspeed,yspeed,rotate,throwerspeed)
+        print(xspeed,yspeed,rotate,throwerspeed)
+
+        return States.controller
+
+
+    def enemy_basket_spin(self, processedData,basketColor):
+
+        if len(processedData.balls) > 0: # if robot sees ball goes to drive
+            return States.drive
+
+
+        basket = processedData.basket_m if basketColor == Color.BLUE else processedData.basket_b #basket color designation
+
+        if basket.exists:   #if no balls are seen and the enemy basket is seen. Robot starts approaching the enemy basket
+            return States.enemy_basket_approach
+
+        self.motion.move(0, 0, 1, 0)
+
+        return States.enemy_basket_spin
+
+
+
+    def enemy_basket_approach(self, processedData, basketColor):
+
+        if len(processedData.balls) > 0: # if robot sees ball goes to drive
+            return States.drive
+
+        basket = processedData.basket_m if basketColor == Color.BLUE else processedData.basket_b #basket color designation
+
+        if basket.exists:
+            if basket.distance > 75: # if 
+               xmiddif = (self.frame_centre_x -  (basket.x)) * 0.003  #proportional driving based on basket x coordinate
+               self.motion.move(0, 0.4, xmiddif, 0)
+               return States.enemy_basket_approach
+
+            else:
+                return States.spin
+        
+        return States.enemy_basket_spin
+
