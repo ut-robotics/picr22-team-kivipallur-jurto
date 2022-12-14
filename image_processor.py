@@ -4,7 +4,7 @@ import pickle as pickle
 import numpy as np
 import cv2
 import Color as c
-import black_count as black_f
+import jit_functions as jit_f
 
 
 class Object():
@@ -117,7 +117,7 @@ class ImageProcessor():
             else:
                 y2 = self.camera.rgb_height -1
 
-            black_count = black_f.black_check(x1,x2,y1,y2,fragments)
+            black_count = jit_f.black_check(x1,x2,y1,y2,fragments)
             #print(f"black pixels: {black_count}")
             
 
@@ -136,7 +136,7 @@ class ImageProcessor():
 
         return balls
 
-    def analyze_baskets(self, t_basket, debug_color = (0, 255, 255)) -> list:
+    def analyze_baskets(self, t_basket, depth_frame, debug_color = (0, 255, 255)) -> list:
         contours, hierarchy = cv2.findContours(t_basket, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         baskets = []
@@ -151,10 +151,14 @@ class ImageProcessor():
 
             x, y, w, h = cv2.boundingRect(contour)
 
+
             obj_x = int(x + (w/2))
             obj_y = int(y + (h/2))
-            obj_dst = round(100*(self.camera.pixel_distance(obj_x,obj_y)))
 
+            #obj_dst = round(100*(self.camera.pixel_distance(obj_x,obj_y)))
+            
+            obj_dst = round(np.median(jit_f.median_depth(obj_x,obj_y,depth_frame)))
+            print(obj_dst)
             baskets.append(Object(x = obj_x, y = obj_y, size = size, distance = obj_dst, exists = True))
 
         baskets.sort(key= lambda x: x.size)
@@ -182,8 +186,8 @@ class ImageProcessor():
             self.debug_frame = np.copy(color_frame)
 
         balls = self.analyze_balls(self.t_balls, self.fragmented)
-        basket_b = self.analyze_baskets(self.t_basket_b, debug_color=c.Color.BLUE.color.tolist())
-        basket_m = self.analyze_baskets(self.t_basket_m, debug_color=c.Color.MAGENTA.color.tolist())
+        basket_b = self.analyze_baskets(self.t_basket_b, depth_frame, debug_color=c.Color.BLUE.color.tolist())
+        basket_m = self.analyze_baskets(self.t_basket_m, depth_frame, debug_color=c.Color.MAGENTA.color.tolist())
 
         return ProcessedResults(balls = balls, 
                                 basket_b = basket_b, 

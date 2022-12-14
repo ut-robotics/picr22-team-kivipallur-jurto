@@ -17,7 +17,7 @@ def main_loop():
 
     timeoutframes = 0 #every time spin function is done timeoutframes increases, any other function resets it.
 
-    debug = False   #Whether or not to show the debug frame
+    debug = True   #Whether or not to show the debug frame
 
     referee = ref_commands.Referee_cmd_client()
     cam = camera.RealsenseCamera(exposure = 100)
@@ -70,7 +70,7 @@ def main_loop():
             elif msg is not None and msg['signal'] == 'stop':
                 status = False
             # has argument aligned_depth that enables depth frame to color frame alignment. Costs performance
-            print(controller_connected)
+            #print(controller_connected)
             if(controller_connected):
                 if (controller.button_a.is_pressed):
                     current_state = MainMovement.States.controller
@@ -95,7 +95,7 @@ def main_loop():
             end = time.time()
             fps = 1 / (end - start)
             start = end
-            print("FPS: {}, framecount: {}".format(fps, frame_cnt))
+            #print("FPS: {}, framecount: {}".format(fps, frame_cnt))
             #print("ball_count: {}".format(len(processedData.balls)))
 
             #whether to show the camera image or not
