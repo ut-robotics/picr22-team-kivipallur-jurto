@@ -15,6 +15,8 @@ def main_loop():
 
     basketcolor = Color.BLUE # if no referee command is received we use this
 
+    timeoutframes = 0 #every time spin function is done timeoutframes increases, any other function resets it.
+
     debug = False   #Whether or not to show the debug frame
 
     referee = ref_commands.Referee_cmd_client()
@@ -71,30 +73,29 @@ def main_loop():
             print(controller_connected)
             if(controller_connected):
                 if (controller.button_a.is_pressed):
-                    if current_state == MainMovement.States.controller:
-                        current_state = MainMovement.States.spin
-                        status = 1
-                    else:
-                        current_state = MainMovement.States.controller
-                        status = 1
+                    current_state = MainMovement.States.controller
+                    status = 1
+                if (controller.button_x.is_pressed):
+                    current_state = MainMovement.States.spin
+                    status = 1
 
                 if (controller.button_b.is_pressed):
+                    current_state = MainMovement.States.spin
                     status = 0
                     controller_connected = False
 
             
             #processed data list which we use for movement
-            processedData = processor.process_frame(aligned_depth=False)
-            rgb = processedData.color_frame
+            processedData = processor.process_frame()
 
             frame_cnt +=1
 
             frame += 1
             frame = 0
             end = time.time()
-            fps = 30 / (end - start)
+            fps = 1 / (end - start)
             start = end
-            #print("FPS: {}, framecount: {}".format(fps, frame_cnt))
+            print("FPS: {}, framecount: {}".format(fps, frame_cnt))
             #print("ball_count: {}".format(len(processedData.balls)))
 
             #whether to show the camera image or not
@@ -110,7 +111,8 @@ def main_loop():
             #State machine
             if status:
                 if current_state == MainMovement.States.spin:
-                    current_state = movementState.spin(processedData)
+                    timeoutframes += 1
+                    current_state = movementState.spin(processedData,timeoutframes)
                 elif current_state == MainMovement.States.drive:
                     current_state = movementState.drive(processedData)
                 elif current_state == MainMovement.States.orbit:
@@ -118,9 +120,14 @@ def main_loop():
                 elif current_state == MainMovement.States.throw:
                     current_state = movementState.throw(processedData,basketcolor)
                 elif current_state == MainMovement.States.controller:
-                    current_state == movementState.controller(controller)
+                    current_state = movementState.controller(controller)
+                elif current_state == MainMovement.States.enemy_basket_spin:
+                    current_state = movementState.enemy_basket_spin(processedData, basketcolor)
+                elif current_state == MainMovement.States.enemy_basket_approach:
+                    current_state = movementState.enemy_basket_approach(processedData, basketcolor)
             #print(current_state)
-            
+            if current_state != MainMovement.States.spin:
+                timeoutframes = 0  
 
     except KeyboardInterrupt:
         print("closing....")

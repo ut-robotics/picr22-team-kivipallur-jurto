@@ -10,6 +10,7 @@ import serial.tools.list_ports as serials
 from enum import Enum
 from json import loads
 from Color import Color
+from xbox360controller import Xbox360Controller
 
 
 
@@ -64,8 +65,9 @@ class States(Enum):
     drive = 1
     orbit = 2
     throw = 3
-    read_ref = 4
-    controller = 5
+    controller = 4
+    enemy_basket_spin = 5
+    enemy_basket_approach = 6
 
 
 class StateMachine():
@@ -74,7 +76,10 @@ class StateMachine():
         self.frame_centre_x = frame_width/2
         self.frame_height = frame_height
 
-    def spin(self, processedData):
+    def spin(self, processedData,timeoutframes):
+        if timeoutframes > 500:
+            return States.enemy_basket_spin
+
         # if it finds more than 1 ball to choose from, it goes to the drive function
         if len(processedData.balls) > 0:
             #print(processedData.balls)
@@ -88,7 +93,7 @@ class StateMachine():
         if len(processedData.balls) > 0:
             ball = processedData.balls[-1]
             #print("distance: {}".format(ball))
-            xmiddif = (self.frame_centre_x - (ball.x)) * 0.002              #approcing ball relative to the ball's x and y coordinate
+            xmiddif = (self.frame_centre_x - (ball.x)) * 0.0075              #approcing ball relative to the ball's x and y coordinate
             yfor = (self.frame_height*0.75 - (ball.distance)) * 0.005
             #print("x: ", xmiddif, ", y: ", yfor)
             self.motion.move(0, yfor, xmiddif, 0)
@@ -106,14 +111,14 @@ class StateMachine():
 
         if len(processedData.balls) > 0 : #checks if robot can see ball
             ball = processedData.balls[-1]
-            orbitrad = (self.frame_height*0.83 - ball.distance) *0.003
-            orbitvar = (self.frame_centre_x - ball.x )*0.009 #variable
+            orbitrad = (self.frame_height*0.95 - ball.distance) *0.004
+            orbitvar = (self.frame_centre_x - ball.x )*0.02 #variable
             
             orbitdirmultiplier = 1 #used to assign the direction of orbit
            
             pixel_difference = 2
             # if it has a basket in frame and it is centred, it goes to throw the ball:
-            if basket.exists and self.frame_centre_x -pixel_difference  < basket.x < self.frame_centre_x + pixel_difference:
+            if basket.exists and self.frame_centre_x -pixel_difference  < basket.x < self.frame_centre_x + pixel_difference +1:
 
                 print("could throw")
                 return States.throw
@@ -142,14 +147,14 @@ class StateMachine():
     def throw(self, processedData,basketColor):
 
         basket = processedData.basket_b if basketColor == Color.BLUE else processedData.basket_m
-        thrower_speed = 3*basket.distance + 370 # Semi accurate thrower speed calculation based on testing
+        thrower_speed = round(3.2*basket.distance) + 340 # Semi accurate thrower speed calculation based on testing
         #thrower_speed = 800
         print(basket.distance, thrower_speed)
         if len(processedData.balls) > 0:
             ball = processedData.balls[-1]
-            xmiddif = (self.frame_centre_x -  (basket.x)) * 0.003  #proportional driving
+            xmiddif = (self.frame_centre_x -10 -  (basket.x)) * 0.003  #proportional driving
             
-            self.motion.move(0, 0.2, xmiddif, thrower_speed) #thrower speed for revving the motor
+            self.motion.move(0, 0.3, xmiddif, thrower_speed) #thrower speed for revving the motor
             
             if ball.distance >= self.frame_height*0.58:
                 return States.throw
@@ -163,7 +168,7 @@ class StateMachine():
     
 
     def controller(self,controller):
-
+        print("im here")
         throwerspeed = round(controller.trigger_r.value *1900)
         print(throwerspeed)
         yspeed = controller.axis_l._value_y *-0.9
@@ -171,3 +176,43 @@ class StateMachine():
 
         rotate = controller.axis_r._value_x *-0.75
         self.motion.move(xspeed,yspeed,rotate,throwerspeed)
+        print(xspeed,yspeed,rotate,throwerspeed)
+
+        return States.controller
+
+
+    def enemy_basket_spin(self, processedData,basketColor):
+
+        if len(processedData.balls) > 0: # if robot sees ball goes to drive
+            return States.drive
+
+
+        basket = processedData.basket_m if basketColor == Color.BLUE else processedData.basket_b #basket color designation
+
+        if basket.exists:   #if no balls are seen and the enemy basket is seen. Robot starts approaching the enemy basket
+            return States.enemy_basket_approach
+
+        self.motion.move(0, 0, 1, 0)
+
+        return States.enemy_basket_spin
+
+
+
+    def enemy_basket_approach(self, processedData, basketColor):
+
+        if len(processedData.balls) > 0: # if robot sees ball goes to drive
+            return States.drive
+
+        basket = processedData.basket_m if basketColor == Color.BLUE else processedData.basket_b #basket color designation
+
+        if basket.exists:
+            if basket.distance > 75: # if 
+               xmiddif = (self.frame_centre_x -  (basket.x)) * 0.003  #proportional driving based on basket x coordinate
+               self.motion.move(0, 0.4, xmiddif, 0)
+               return States.enemy_basket_approach
+
+            else:
+                return States.spin
+        
+        return States.enemy_basket_spin
+

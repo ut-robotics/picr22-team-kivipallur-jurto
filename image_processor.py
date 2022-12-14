@@ -4,6 +4,7 @@ import pickle as pickle
 import numpy as np
 import cv2
 import Color as c
+import black_count as black_f
 
 
 class Object():
@@ -74,6 +75,7 @@ class ImageProcessor():
     def stop(self):
         self.camera.close()
 
+
     def analyze_balls(self, t_balls, fragments) -> list:
         t_balls = cv2.dilate(t_balls, self.kernel, iterations=2)
         #t_balls = cv2.erode(t_balls, self.kernel, iterations=1)
@@ -81,8 +83,6 @@ class ImageProcessor():
 
         balls = []
         for contour in contours:
-
-            
 
             size = cv2.contourArea(contour)
 
@@ -100,34 +100,30 @@ class ImageProcessor():
 
 #black detection
 
-            if (obj_x -2) > 1:
-                x1 = (obj_x -2)
+            if (obj_x -4) > 1:
+                x1 = (obj_x -4)
             else:
                 x1 = 0
             
-            if (obj_x +2) < self.camera.rgb_width-2:
-                x2 = (obj_x +2)
+            if (obj_x +4) < self.camera.rgb_width-2:
+                x2 = (obj_x +4)
             else:
                 x2 = self.camera.rgb_width -1
 
             y1 = obj_y
 
-            if (obj_y + 40) < self.camera.rgb_height-40:
-                y2 = (obj_y + 40)
+            if (obj_y + 350) < self.camera.rgb_height-350:
+                y2 = (obj_y + 350)
             else:
                 y2 = self.camera.rgb_height -1
-            black_count = 0
 
-            for x in range(x1,x2):
-                for y in range(y1,y2):
-                    if fragments[y][x] == 6: #for black
-                        black_count += 1
+            black_count = black_f.black_check(x1,x2,y1,y2,fragments)
             #print(f"black pixels: {black_count}")
             
 
 #black detection
 
-            if obj_y > 30 and black_count < 10:
+            if obj_y > 30 and black_count < 50:
                 
                 balls.append(Object(x = obj_x, y = obj_y, size = size, distance = obj_dst, exists = True))
 
@@ -171,13 +167,13 @@ class ImageProcessor():
 
         return basket
 
-    def get_frame_data(self, aligned_depth = False):
+    def get_frame_data(self, aligned_depth = True):
         if self.camera.has_depth_capability():
             return self.camera.get_frames(aligned = aligned_depth)
         else:
             return self.camera.get_color_frame(), np.zeros((self.camera.rgb_height, self.camera.rgb_width), dtype=np.uint8)
 
-    def process_frame(self, aligned_depth = False) -> ProcessedResults:
+    def process_frame(self, aligned_depth = True) -> ProcessedResults:
         color_frame, depth_frame = self.get_frame_data(aligned_depth = aligned_depth)
 
         segment.segment(color_frame, self.fragmented, self.t_balls, self.t_basket_m, self.t_basket_b)

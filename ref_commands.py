@@ -10,7 +10,7 @@ import numpy as np
 class Referee_cmd_client:
     def __init__(self):
         #ip and port
-        self.ip = "192.168.3.69" 
+        self.ip = "192.168.3.40" 
         self.port = "8222"
 
         #define queue

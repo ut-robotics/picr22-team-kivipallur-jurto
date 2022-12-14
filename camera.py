@@ -72,7 +72,7 @@ class RealsenseCamera(ICamera):
     def has_depth_capability(self) -> bool:
         return self.depth_enabled
 
-    def get_frames(self, aligned = False):
+    def get_frames(self, aligned = True):
         frames = self.pipeline.wait_for_frames()
         if aligned:
             frames = self.align.process(frames)
