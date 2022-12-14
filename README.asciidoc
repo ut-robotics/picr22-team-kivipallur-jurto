@@ -306,3 +306,5 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 *Kaspar:* debugged our firmware (5h) +
 *Artur:* helped with coding (2h) +
 
+=== Wednesday 2022-12-14
+*Madis:* Designed thrower with changeable throwing angle (4h) +
