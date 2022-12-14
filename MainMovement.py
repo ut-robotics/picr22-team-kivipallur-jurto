@@ -71,10 +71,11 @@ class States(Enum):
 
 
 class StateMachine():
-    def __init__(self, motion, frame_width, frame_height):
+    def __init__(self, motion, frame_width, frame_height, throwtime):
         self.motion = motion
         self.frame_centre_x = frame_width/2
         self.frame_height = frame_height
+        self.throwtime = throwtime
 
     def spin(self, processedData,timeoutframes):
         if timeoutframes > 500:
@@ -146,23 +147,31 @@ class StateMachine():
 
     def throw(self, processedData,basketColor):
 
+        
         basket = processedData.basket_b if basketColor == Color.BLUE else processedData.basket_m
-        thrower_speed = round(3.2*basket.distance) + 340 # Semi accurate thrower speed calculation based on testing
+        thrower_speed = round(3*basket.distance) + 370 # Semi accurate thrower speed calculation based on testing
         #thrower_speed = 800
         print(basket.distance, thrower_speed)
-        if len(processedData.balls) > 0:
-            ball = processedData.balls[-1]
-            xmiddif = (self.frame_centre_x -10 -  (basket.x)) * 0.003  #proportional driving
-            
-            self.motion.move(0, 0.3, xmiddif, thrower_speed) #thrower speed for revving the motor
-            
-            if ball.distance >= self.frame_height*0.58:
-                return States.throw
+        if self.throwtime == 0:
+            if len(processedData.balls) > 0:
+                ball = processedData.balls[-1]
+                xmiddif = (self.frame_centre_x -10 -  (basket.x)) * 0.003  #proportional driving
+                
+                self.motion.move(0, 0.3, xmiddif, thrower_speed) #thrower speed for revving the motor
+                
+                if ball.distance < self.frame_height*0.90:        #NEEDS TUNING
+                    self.throwtime = 100
 
-        for n in range(5):
-            self.motion.move(0, 0.2, 0, thrower_speed) # hardcoded throw
-            time.sleep(0.3)
+                return States.throw
+        else:
+            self.throwtime -= 1
+            xmiddif = (self.frame_centre_x -10 -  (basket.x)) * 0.003  #proportional driving
+                
+            self.motion.move(0, 0.3, xmiddif, thrower_speed)
+            return States.throw
+
         return States.spin
+
 
 
     

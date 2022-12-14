@@ -78,9 +78,7 @@ class RealsenseCamera(ICamera):
             frames = self.align.process(frames)
         return np.asanyarray(frames.get_color_frame().get_data()), np.asanyarray(frames.get_depth_frame().get_data())
     
-    def pixel_distance(self,x,y):
-        frame = self.pipeline.wait_for_frames()                 #Priidu lisa
-        return frame.get_depth_frame().get_distance(x,y)
+
 
 # resolution numbers are sensitive with openCV. Implement a resolution setting mechanism here or use the default of the webcam to
 # get a more robust solution
