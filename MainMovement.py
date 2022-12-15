@@ -71,11 +71,13 @@ class States(Enum):
 
 
 class StateMachine():
-    def __init__(self, motion, frame_width, frame_height, throwtime):
+    def __init__(self, motion, frame_width, frame_height,):
         self.motion = motion
         self.frame_centre_x = frame_width/2
         self.frame_height = frame_height
-        self.throwtime = throwtime
+        self.throwdist = 0
+        self.throw_wo_ball = False
+
 
     def spin(self, processedData,timeoutframes):
         if timeoutframes > 500:
@@ -101,10 +103,10 @@ class StateMachine():
             if ball.distance >= self.frame_height*0.73:
                 # if it is close enough to a ball, it should start orbiting around it to find the basket:
                 return States.orbit
+            return States.drive
         # if it loses the ball for some reason (opponent takes it), it starts spinning to look for a new one:
-        else:
-            return States.spin
-        return States.drive
+        return States.spin
+        
 
     def orbit(self, processedData, basketColor):
         
@@ -112,26 +114,22 @@ class StateMachine():
 
         if len(processedData.balls) > 0 : #checks if robot can see ball
             ball = processedData.balls[-1]
-            orbitrad = (self.frame_height*0.95 - ball.distance) *0.004
+            orbitrad = (self.frame_height*0.90 - ball.distance) *0.004
             orbitvar = (self.frame_centre_x - ball.x )*0.02 #variable
             
             orbitdirmultiplier = 1 #used to assign the direction of orbit
            
-            pixel_difference = 2
+            pixel_difference = 3
             # if it has a basket in frame and it is centred, it goes to throw the ball:
-            if basket.exists and self.frame_centre_x -pixel_difference  < basket.x < self.frame_centre_x + pixel_difference +1:
+            if basket.exists and self.frame_centre_x -pixel_difference  < basket.x < self.frame_centre_x + pixel_difference :
 
                 print("could throw")
                 return States.throw
             # if it has a ball and a basket in frame, but the basket isn't centred:
             elif basket.exists:
-                orbitdirmultiplier = (self.frame_centre_x - basket.x)*0.002
+                orbitdirmultiplier = (self.frame_centre_x - basket.x)*0.004
                 #print(orbitdirmultiplier)
-                if orbitdirmultiplier > 0.1:
-                    orbitdirmultiplier = 0.1
-                elif orbitdirmultiplier < -0.1:
-                    orbitdirmultiplier = -0.1
-
+                orbitdirmultiplier = max(min(orbitdirmultiplier,0.1),-0.1)
 
                 self.motion.move(orbitdirmultiplier, orbitrad, orbitvar, 0)
                 # centre basket and ball to frame
@@ -139,37 +137,40 @@ class StateMachine():
             elif not basket.exists:
 
                 self.motion.move(0.3, orbitrad, orbitvar, 0)
+            return States.orbit
         # if it lost the ball, it goes to look for a new one:
-        else:
-            return States.spin
-        return States.orbit
+        return States.spin
+        
 
 
     def throw(self, processedData,basketColor):
 
         
         basket = processedData.basket_b if basketColor == Color.BLUE else processedData.basket_m
-        thrower_speed = round(3*basket.distance) + 370 # Semi accurate thrower speed calculation based on testing
+        thrower_speed = round(3*basket.distance) + 380 # Semi accurate thrower speed calculation based on testing
         #thrower_speed = 800
-        print(basket.distance, thrower_speed)
-        if self.throwtime == 0:
+        print(basket.distance, thrower_speed, self.throw_wo_ball)
+
+        if not self.throw_wo_ball:
             if len(processedData.balls) > 0:
                 ball = processedData.balls[-1]
-                xmiddif = (self.frame_centre_x -10 -  (basket.x)) * 0.003  #proportional driving
+                xmiddif = (self.frame_centre_x*0.976 - (basket.x)) * 0.0055  #proportional driving
                 
                 self.motion.move(0, 0.3, xmiddif, thrower_speed) #thrower speed for revving the motor
-                
-                if ball.distance < self.frame_height*0.90:        #NEEDS TUNING
-                    self.throwtime = 100
+                print(ball.distance)
+                if ball.distance > 0.83*self.frame_height:        #NEEDS TUNING
+                    self.throw_wo_ball = True
+                    self.throwdist = basket.distance
 
                 return States.throw
         else:
-            self.throwtime -= 1
-            xmiddif = (self.frame_centre_x -10 -  (basket.x)) * 0.003  #proportional driving
-                
-            self.motion.move(0, 0.3, xmiddif, thrower_speed)
-            return States.throw
+            if self.throwdist -20 < basket.distance:
+                xmiddif = (self.frame_centre_x*0.976 - (basket.x)) * 0.0055  #proportional driving
+                print(self.throwdist,self.throw_wo_ball)
+                self.motion.move(0, 0.3, xmiddif, thrower_speed)
+                return States.throw
 
+        self.throw_wo_ball = False
         return States.spin
 
 

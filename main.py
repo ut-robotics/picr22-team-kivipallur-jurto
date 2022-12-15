@@ -1,4 +1,3 @@
-from pickle import FALSE
 import image_processor
 import camera
 import MainMovement
@@ -16,7 +15,6 @@ def main_loop():
     basketcolor = Color.BLUE # if no referee command is received we use this
 
     timeoutframes = 0 #every time spin function is done timeoutframes increases, any other function resets it.
-    throwtime = 0
 
     debug = True   #Whether or not to show the debug frame
 
@@ -36,7 +34,7 @@ def main_loop():
     current_state = MainMovement.States.spin
 
     #class call from other files
-    movementState = MainMovement.StateMachine(motion,cam.rgb_width,cam.rgb_height,throwtime)
+    movementState = MainMovement.StateMachine(motion,cam.rgb_width,cam.rgb_height)
     processor = image_processor.ImageProcessor(cam, debug=debug)
     
     #opening all that needs to be opened
@@ -75,14 +73,14 @@ def main_loop():
             if(controller_connected):
                 if (controller.button_a.is_pressed):
                     current_state = MainMovement.States.controller
-                    status = 1
+                    status = True
                 if (controller.button_x.is_pressed):
                     current_state = MainMovement.States.spin
-                    status = 1
+                    status = True
 
                 if (controller.button_b.is_pressed):
                     current_state = MainMovement.States.spin
-                    status = 0
+                    status = False
                     controller_connected = False
 
             

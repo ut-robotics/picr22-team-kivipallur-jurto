@@ -78,7 +78,7 @@ class ImageProcessor():
 
     def analyze_balls(self, t_balls, fragments) -> list:
         t_balls = cv2.dilate(t_balls, self.kernel, iterations=2)
-        #t_balls = cv2.erode(t_balls, self.kernel, iterations=1)
+        t_balls = cv2.erode(t_balls, self.kernel, iterations=2)
         contours, hierarchy = cv2.findContours(t_balls, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         balls = []
@@ -86,7 +86,7 @@ class ImageProcessor():
 
             size = cv2.contourArea(contour)
 
-            if size < 20:
+            if size < 5:
                 continue
 
             x, y, w, h = cv2.boundingRect(contour)
@@ -100,23 +100,11 @@ class ImageProcessor():
 
 #black detection
 
-            if (obj_x -4) > 1:
-                x1 = (obj_x -4)
-            else:
-                x1 = 0
+            x1 = max(obj_x - 4, 0)
+            x2 = min(obj_x + 4, self.camera.rgb_width-2)
             
-            if (obj_x +4) < self.camera.rgb_width-2:
-                x2 = (obj_x +4)
-            else:
-                x2 = self.camera.rgb_width -1
-
             y1 = obj_y
-
-            if (obj_y + 350) < self.camera.rgb_height-350:
-                y2 = (obj_y + 350)
-            else:
-                y2 = self.camera.rgb_height -1
-
+            y2 = min(obj_y + round(self.camera.rgb_height*0.73),self.camera.rgb_height -1)
             black_count = jit_f.black_check(x1,x2,y1,y2,fragments)
             #print(f"black pixels: {black_count}")
             
@@ -157,8 +145,8 @@ class ImageProcessor():
 
             #obj_dst = round(100*(self.camera.pixel_distance(obj_x,obj_y)))
             
-            obj_dst = round(np.median(jit_f.median_depth(obj_x,obj_y,depth_frame)))
-            print(obj_dst)
+            obj_dst = round(np.median(jit_f.median_depth(obj_x,obj_y,depth_frame))/10)
+            #print(obj_dst)
             baskets.append(Object(x = obj_x, y = obj_y, size = size, distance = obj_dst, exists = True))
 
         baskets.sort(key= lambda x: x.size)
