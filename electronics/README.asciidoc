@@ -1,0 +1,41 @@
+# Kivipallur Jurto electronics documentation
+
+# Kivipallur Jurto mainboard functionality
+
++ Mainboard consists of 2 separate isolated schematics: 
+* Logic schematic with is powered with USB source
+* Motor drivers schematic that are powered with lithium ion battery
+
++ Communication between the mainboard STM32 controller and computer is through microUSB
+
++ Mainboard is programmebel with STLINK-V3 mainboard has for that Samtec connector
+
++ Mainboard has 7 MicroMatch connectors: 
+* 3 for motor encoders (m_1; m_2; m_3)
+* 1 for Thrower motor (Viskaja)
+* 1 for Throwing angle adjust motor (Pl_S)
+* 1 for Ball holder motor (Pl_H)
+* 1 for Ball sensor
+
++ Mainboard has 2 voltage regulators 
+* Logic schematic to turn 5V to 3.3V 
+* Motor drivers schematic to turn 16V to 5V
+
++ Mainboard has 3 drivers for controlling motors (M_1; M_2; M_3)
+
++ Motor drivers can be controlled through 2 PWM signals or one direction signal and one PWM signal
+
++ Motor drivers need nSLEEP pulse to initialize
+
++ Motor drivers SR pin for slew rate with 47k resistor
+
++ Motor drivers ITRIP pin for load current regulation with 47k resistor
+
++ Motor drivers IPROPI pin for driver load current analog feedback with 2.7k resistor
+
++ Motor drivers DIAG pin connected to MODE and GND
+
++ Motor drivers DRVOFF pin to put the driver on standby 
+
+![My Image](electronics/PCB_png/Kivipallur_Jurto_PCB_front.png)
+![My Image](electronics/PCB_png/Kivipallur_Jurto_PCB_back.png)
