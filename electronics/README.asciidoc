@@ -3,19 +3,19 @@
 # Kivipallur Jurto mainboard functionality
 
 + Mainboard consists of 2 separate isolated schematics: 
-++ Logic schematic with is powered with USB source
-++ Motor drivers schematic that are powered with lithium ion battery
+Logic schematic with is powered with USB source
+Motor drivers schematic that are powered with lithium ion battery
 
 + Communication between the mainboard STM32 controller and computer is through microUSB
 
 + Mainboard is programmebel with STLINK-V3 mainboard has for that Samtec connector
 
 + Mainboard has 7 MicroMatch connectors: 
-++ 3 for motor encoders (m_1; m_2; m_3)
-++ 1 for Thrower motor (Viskaja)
-++ 1 for Throwing angle adjust motor (Pl_S)
-++ 1 for Ball holder motor (Pl_H)
-++ 1 for Ball sensor
+3 for motor encoders (m_1; m_2; m_3)
+1 for Thrower motor (Viskaja)
+1 for Throwing angle adjust motor (Pl_S)
+1 for Ball holder motor (Pl_H)
+1 for Ball sensor
 
 + Mainboard has 2 voltage regulators 
 * Logic schematic to turn 5V to 3.3V 
