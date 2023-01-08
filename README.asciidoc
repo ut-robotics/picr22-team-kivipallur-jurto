@@ -1,7 +1,3 @@
-# Kivipallur-Jurto
+# Kivipallur Jurto electronics branch
 
-Meeskonna liikmed:
-Artur Reitalu
-Kristjan Madis Kask
-Kaspar Tamm
-Priit Teelahk
+## In the electronics folder you will find Kivipallur Jurto mainbord documentation.
