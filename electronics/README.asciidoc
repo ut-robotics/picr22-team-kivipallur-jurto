@@ -37,5 +37,5 @@ Motor drivers schematic that are powered with lithium ion battery
 
 * Motor drivers DRVOFF pin to put the driver on standby 
 
-![My Image](electronics/PCB_png/Kivipallur_Jurto_PCB_front.png)
-![My Image](electronics/PCB_png/Kivipallur_Jurto_PCB_back.png)
+./PCB_png/Kivipallur_Jurto_PCB_front.png
+./PCB_png/Kivipallur_Jurto_PCB_back.png
