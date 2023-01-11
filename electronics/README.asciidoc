@@ -65,25 +65,25 @@
 ** pin 9 GND
 ** pin 10 Debug NRST
 
-*(J8) Motor 1 encoder (m_1)
+* (J8) Motor 1 encoder (m_1)
 ** pin 1 GND
 ** pin 2 +3.3V
 ** pin 3 Mikro-m1-en1
 ** pin 4 Micro-m1-en2
 
-*(J10) Motor 2 encoder (m_2)
+* (J10) Motor 2 encoder (m_2)
 ** pin 1 GND
 ** pin 2 +3.3V
 ** pin 3 Mikro-m2-en1
 ** pin 4 Micro-m2-en2
 
-*(J12) Motor 3 encoder (m_3)
+* (J12) Motor 3 encoder (m_3)
 ** pin 1 GND
 ** pin 2 +3.3V
 ** pin 3 Mikro-m3-en1
 ** pin 4 Micro-m3-en2
 
-*(J13) Ball sensor
+* (J13) Ball sensor
 ** pin 1 GND
 ** pin 2 +5V_USB
 ** pin 3 not used
@@ -96,19 +96,19 @@
 ** J16 is for + connection
 ** J17 is for - connection
 
-*(J14) Thrower connecor (Viskaja)
+* (J14) Thrower connecor (Viskaja)
 ** pin 1 GND
 ** pin 2 Viskaja_Mootor
 ** pin 3 not used
 ** pin 3 not used
 
-*(9) Ball holder connecor (Pl_H)
+* (J9) Ball holder connecor (Pl_H)
 ** pin 1 +5V
 ** pin 2 Palli_H
 ** pin 3 GND
 ** pin 4 not used
 
-*(J11) Throwing angle connecor (Pl_S)
+* (J11) Throwing angle connecor (Pl_S)
 ** pin 1 +5V
 ** pin 2 Palli_S
 ** pin 3 GND
