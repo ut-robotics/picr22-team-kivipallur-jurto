@@ -8,13 +8,13 @@
 
 * Communication between the mainboard STM32 controller and computer is through microUSB
 
-* Mainboard is programmebel with STLINK-V3 mainboard has for that Samtec connector
+* Mainboard is programmable with STLINK-V3 mainboard has for that Samtec connector
 
 * Mainboard has 7 MicroMatch connectors: 
-** 3 for motor encoders (m_1; m_2; m_3) for thre DC motors
-** 1 for Thrower motor (Viskaja) for one AC motor
-** 1 for Throwing angle adjust motor (Pl_S) for servo motor
-** 1 for Ball holder motor (Pl_H) for servo motor 
+** 3 for movement motor encoders (m_1; m_2; m_3)
+** 1 for Thrower motor (Viskaja)
+** 1 for Throwing angle adjust servo motor (Pl_S)
+** 1 for Ball holder servo motor (Pl_H)
 ** 1 for Ball sensor
 
 * Mainboard has 2 voltage regulators 
@@ -23,21 +23,15 @@
 
 * Mainboard has 3 drivers (DRV8243HQRXYRQ1) for controlling motors (M_1; M_2; M_3). With these drivers we can control 3 DC motors at the same time
 
-* Motor drivers have maximum limit of 35V. But we are using around 16V from lithium ion battery. The current coming out of motor drivers is limited with resistors that are connected to the ITRIP pin and IPROPI pins
-** ITRIP pin is connected with 47k resistor, that sets Voltage to 2.97V
-** IPROPI pin is connected with 2.7k resistor, then the current is limited to 3.38 A.
+* Motor drivers have maximum limit of 25V. But we are using around 16V from lithium ion battery. The current coming out of motor drivers is limited with resistors that are connected to the ITRIP pin and IPROPI pins
+** ITRIP pin is connected with 47k resistor, that sets Voltage to 2.31V
+** IPROPI pin is connected with 2.7k resistor, then the current is limited to 2.63A.
 
-* Motor drivers can be controlled through 2 PWM signals or one direction signal and one PWM signal
+* Motor drivers are controlled through 1 PWM signals and one direction signal.
 
 * Motor drivers need nSLEEP pulse to initialize
 
-* Motor drivers SR pin for slew rate with 47k resistor
-
-* Motor drivers ITRIP pin for load current regulation with 47k resistor
-
-* Motor drivers IPROPI pin for driver load current analog feedback with 2.7k resistor
-
-* Motor drivers DIAG pin connected to MODE and GND
+* Motor drivers SR pin for slew rate with 47k resistor to avoid PWM losses
 
 * Motor drivers DRVOFF pin to put the driver on standby 
 
@@ -45,15 +39,7 @@
 
 === Logic schematic
 
-* (J15) USB connection 
-** pin 1 +5V_USB
-** pin 2 D-
-** pin 3 D+
-** pin 4 not used
-** pin 5 GND
-** pin 6 SHIELD
-
-* (J7) Programmer connecor
+* (J7) Programmer connector
 ** pin 1 +3.3V
 ** pin 2 Debug SWDIO
 ** pin 3 GND
@@ -96,19 +82,19 @@
 ** J16 is for + connection
 ** J17 is for - connection
 
-* (J14) Thrower connecor (Viskaja)
+* (J14) Thrower connector (Viskaja)
 ** pin 1 GND
 ** pin 2 Viskaja_Mootor
 ** pin 3 not used
 ** pin 3 not used
 
-* (J9) Ball holder connecor (Pl_H)
+* (J9) Ball holder connector (Pl_H)
 ** pin 1 +5V
 ** pin 2 Palli_H
 ** pin 3 GND
 ** pin 4 not used
 
-* (J11) Throwing angle connecor (Pl_S)
+* (J11) Throwing angle connector (Pl_S)
 ** pin 1 +5V
 ** pin 2 Palli_S
 ** pin 3 GND
