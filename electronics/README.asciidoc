@@ -23,7 +23,7 @@
 
 * Mainboard has 3 drivers (DRV8243HQRXYRQ1) for controlling motors (M_1; M_2; M_3). With these drivers we can control 3 brushed DC motors at the same time
 
-* Motor drivers input voltage is limited with capacitors that are connected to the drivers. Capacitors that are used have 25V rating, technically the maxium voltage is 25V. But the robot uses 4S lithium ion battery's that have voltage up to 16.8V, so that there is some voltage headroom. The current coming out of motor drivers is limited with resistors that are connected to the ITRIP pin and IPROPI pins
+* Motor drivers input voltage is limited with capacitors that are connected to the drivers. Capacitors that are used have 25V rating, technically the maxium voltage is 25V. But the robot uses 4 cell lithium ion battery's that have voltage up to 16.8V. The current coming out of motor drivers is limited with resistors that are connected to the ITRIP pin and IPROPI pins
 ** ITRIP pin is connected with 47k resistor, that sets Voltage to 2.31V
 ** IPROPI pin is connected with 2.7k resistor, then the current is limited to 2.63A.
 
