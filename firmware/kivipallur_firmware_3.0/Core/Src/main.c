@@ -193,10 +193,17 @@ int32_t PIDcontrol(MotorControl* control, int16_t position){
 uint16_t pwmData[20];
 
 void Thrower_Send (uint16_t command){
+	if (command > 6000, command < 1) {
+		return 0;
+	}
+	return command;
 
+
+//tegin pregu ilma DMA
+	/*
 	uint16_t packet = (command << 1) | 0;
 
-	HAL_TIM_PWM_Stop_DMA(&htim8, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Stop_DMA(&htim15, TIM_CHANNEL_1);
 	int csum = 0;
 	int csum_data = packet;
 	for (int i = 0; i < 3; i++) {
@@ -222,8 +229,8 @@ void Thrower_Send (uint16_t command){
 	for (int i=19; i>=16; i--){
 		pwmData[i] = 0;
 	}
-	HAL_TIM_PWM_Start_DMA(&htim8, TIM_CHANNEL_1, (uint32_t *)pwmData, 20);
-
+	HAL_TIM_PWM_Start_DMA(&htim15, TIM_CHANNEL_1, (uint32_t *)pwmData, 20);
+*/
 
 }
 
@@ -236,23 +243,23 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim6) {
 	if (enable_pid == 1){
 
 		int16_t position;
-		position = (int16_t)TIM1->CNT;
-		int32_t pwmValue = PIDcontrol(&motor1Control, position);
-		HAL_GPIO_WritePin(MOT1_PWM_2_GPIO_Port, MOT1_PWM_2_Pin, (pwmValue < 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-		//wake_drivers_up();
-		TIM1->CCR2 = (uint16_t)clamp((pwmValue < 0) ? -pwmValue : pwmValue, 0, 65535);
-
-		position = (int16_t)TIM2->CNT;
-		pwmValue = PIDcontrol(&motor2Control, position);
-		HAL_GPIO_WritePin(MOT2_PWM_2_GPIO_Port, MOT2_PWM_2_Pin, (pwmValue < 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-		//wake_drivers_up();
-		TIM2->CCR2 = (uint16_t)clamp((pwmValue < 0) ? -pwmValue : pwmValue, 0, 65535);
-
+		//Mootor1
 		position = (int16_t)TIM3->CNT;
-		pwmValue = PIDcontrol(&motor3Control, position);
-		HAL_GPIO_WritePin(MOT3_PWM_2_GPIO_Port, MOT3_PWM_2_Pin, (pwmValue < 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-		//wake_drivers_up();
-		TIM2->CCR4 = (uint16_t)clamp((pwmValue < 0) ? -pwmValue : pwmValue, 0, 65535);
+		int32_t MOT_1_pwmValue = PIDcontrol(&motor1Control, position);
+		HAL_GPIO_WritePin(GPIOA, MOT1_suund_Pin, (MOT_1_pwmValue < 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+		TIM1->CCR2 = (uint16_t)clamp((MOT_1_pwmValue < 0) ? -MOT_1_pwmValue : MOT_1_pwmValue, 0, 65535);
+
+		//Mootor2
+		position = (int16_t)TIM4->CNT;
+		int32_t MOT_2_pwmValue = PIDcontrol(&motor2Control, position);
+		HAL_GPIO_WritePin(GPIOA, MOT2_suund_Pin, (MOT_2_pwmValue < 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+		TIM2->CCR2 = (uint16_t)clamp((MOT_2_pwmValue < 0) ? -MOT_2_pwmValue : MOT_2_pwmValue, 0, 65535);
+
+		//Mootor3
+		position = (int16_t)TIM8->CNT;
+		int32_t MOT_3_pwmValue = PIDcontrol(&motor3Control, position);
+		HAL_GPIO_WritePin(GPIOA, MOT3_suund_Pin, (MOT_3_pwmValue < 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+		TIM2->CCR4 = (uint16_t)clamp((MOT_3_pwmValue < 0) ? -MOT_3_pwmValue : MOT_3_pwmValue, 0, 65535);
 
 		timer+=1;
 		if (timer == 50){
@@ -326,19 +333,26 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_2);
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  //HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
+  //HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+  //HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
 
-  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_1);
-  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_2);
-  HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_1);
-  HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_2);
-  HAL_TIM_Encoder_Start(&htim8, TIM_CHANNEL_1);
-  HAL_TIM_Encoder_Start(&htim8, TIM_CHANNEL_2);
+  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_1 | TIM_CHANNEL_2);
+  //HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_2);
+  HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_1 | TIM_CHANNEL_2);
+  //HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_2);
+  HAL_TIM_Encoder_Start(&htim8, TIM_CHANNEL_1 | TIM_CHANNEL_2);
+  //HAL_TIM_Encoder_Start(&htim8, TIM_CHANNEL_2);
+
+
+  TIM1->CCR2 = 0;
+  TIM2->CCR1 = 0;
+  TIM2->CCR4 = 0;
+
+  TIM15->CCR2 = 3000;
 
 /*
   TIM15->CCR2 = 3000;
@@ -350,7 +364,7 @@ int main(void)
   TIM2->CCR2 = 0;
   TIM2->CCR3 = 0;
   TIM2->CCR4 = 20000;
-*/
+
 
   TIM1->CCR1 = 0;
   TIM1->CCR2 = 12000;
@@ -366,7 +380,7 @@ int main(void)
   HAL_Delay(100);
   TIM15->CCR2 = 3000;
 
-/*
+
   TIM1->CCR1 = 0;
   TIM1->CCR2 = 0;
   TIM2->CCR1 = 0;
@@ -387,16 +401,16 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-        wake_drivers_up();
-
 
     /* USER CODE BEGIN 3 */
 	  if (driverReset) {
 
+		  /*
 	  		  driverReset = 0;
 	  		  TIM15->CCR2 = 61750;
 	  		  HAL_Delay(100);
 	  	   	  TIM15->CCR2 = 65535;
+		*/
 
 	  	  }
 
@@ -418,14 +432,14 @@ int main(void)
 	  	        CDC_Transmit_FS(&feedback, sizeof(feedback)); // (5)
 	  	      }
 
-	  	wake_drivers_up();
+	  	//wake_drivers_up();
 	  	HAL_Delay(100);
 
   }
 
 }
   /* USER CODE END 3 */
-
+//}
 
 /**
   * @brief System Clock Configuration
@@ -648,10 +662,6 @@ static void MX_TIM1_Init(void)
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
   sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
@@ -722,14 +732,6 @@ static void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
-  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
-  {
-    Error_Handler();
-  }
   if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
   {
     Error_Handler();
@@ -765,7 +767,7 @@ static void MX_TIM3_Init(void)
   htim3.Init.Period = 65535;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  sConfig.EncoderMode = TIM_ENCODERMODE_TI1;
+  sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
   sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
   sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
   sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
@@ -814,7 +816,7 @@ static void MX_TIM4_Init(void)
   htim4.Init.Period = 65535;
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  sConfig.EncoderMode = TIM_ENCODERMODE_TI1;
+  sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
   sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
   sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
   sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
@@ -902,7 +904,7 @@ static void MX_TIM8_Init(void)
   htim8.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim8.Init.RepetitionCounter = 0;
   htim8.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  sConfig.EncoderMode = TIM_ENCODERMODE_TI1;
+  sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
   sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
   sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
   sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
@@ -1155,7 +1157,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOF, LED_B1_D3_Pin|LED_B2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_R1_D1_GPIO_Port, LED_R1_D1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, MOT2_suund_Pin|MOT3_suund_Pin|LED_R1_D1_Pin|MOT1_suund_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, MOT_SLEEP_Pin|MOT_OFF_Pin, GPIO_PIN_RESET);
@@ -1167,12 +1169,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LED_R1_D1_Pin */
-  GPIO_InitStruct.Pin = LED_R1_D1_Pin;
+  /*Configure GPIO pins : MOT2_suund_Pin MOT3_suund_Pin LED_R1_D1_Pin MOT1_suund_Pin */
+  GPIO_InitStruct.Pin = MOT2_suund_Pin|MOT3_suund_Pin|LED_R1_D1_Pin|MOT1_suund_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_R1_D1_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LED_R2_D2_Pin */
   GPIO_InitStruct.Pin = LED_R2_D2_Pin;

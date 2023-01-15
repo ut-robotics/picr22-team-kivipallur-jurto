@@ -65,10 +65,10 @@ void Error_Handler(void);
 #define LED_B2_GPIO_Port GPIOF
 #define MOT2_PWM_1_Pin GPIO_PIN_0
 #define MOT2_PWM_1_GPIO_Port GPIOA
-#define MOT2_PWM_2_Pin GPIO_PIN_1
-#define MOT2_PWM_2_GPIO_Port GPIOA
-#define MOT3_PWM_1_Pin GPIO_PIN_2
-#define MOT3_PWM_1_GPIO_Port GPIOA
+#define MOT2_suund_Pin GPIO_PIN_1
+#define MOT2_suund_GPIO_Port GPIOA
+#define MOT3_suund_Pin GPIO_PIN_2
+#define MOT3_suund_GPIO_Port GPIOA
 #define TRW_PWM_1_Pin GPIO_PIN_3
 #define TRW_PWM_1_GPIO_Port GPIOA
 #define LED_R1_D1_Pin GPIO_PIN_4
@@ -82,8 +82,8 @@ void Error_Handler(void);
 #define AIM_servo_PWM_GPIO_Port GPIOA
 #define MOT_SLEEP_Pin GPIO_PIN_0
 #define MOT_SLEEP_GPIO_Port GPIOB
-#define MOT1_PWM_1_Pin GPIO_PIN_8
-#define MOT1_PWM_1_GPIO_Port GPIOA
+#define MOT1_suund_Pin GPIO_PIN_8
+#define MOT1_suund_GPIO_Port GPIOA
 #define MOT1_PWM_2_Pin GPIO_PIN_9
 #define MOT1_PWM_2_GPIO_Port GPIOA
 #define MOT3_PWM_2_Pin GPIO_PIN_10
