@@ -144,7 +144,7 @@ MotorControl motor3Control = {
 
 Command command = {.speed1 = 0, .speed2 = 0, .speed3 = 0, .throwerSpeed = 0, .delimiter = 0}; // (4)
 volatile uint8_t isCommandReceived = 0; // (5)
-volatile uint8_t driverReset = 0;
+//volatile uint8_t driverReset = 0;
 uint16_t timer = 0;
 uint16_t enable_pid = 0;
 Feedback feedback = { // (1)
@@ -173,9 +173,6 @@ void CDC_On_Receive(uint8_t* buffer, uint32_t* length) { // (6)
 		if (command.delimiter == 0xAAAA) { // (9)
 			isCommandReceived = 1;
 		}
-		if (command.delimiter == 0xBBBB) { // (9)
-	  		driverReset = 1;
-		}
 	}
 }
 
@@ -192,50 +189,14 @@ int32_t PIDcontrol(MotorControl* control, int16_t position){
 
 uint16_t pwmData[20];
 
-void Thrower_Send (uint16_t command){
-	if (command > 6000, command < 1) {
-		return 0;
+void Thrower_Send (uint16_t command) {
+	if (command > 6000) {
+		return 6000;
+	} else if (command < 20) {
+		return 20;
 	}
 	return command;
-
-
-//tegin pregu ilma DMA
-	/*
-	uint16_t packet = (command << 1) | 0;
-
-	HAL_TIM_PWM_Stop_DMA(&htim15, TIM_CHANNEL_1);
-	int csum = 0;
-	int csum_data = packet;
-	for (int i = 0; i < 3; i++) {
-		csum ^=  csum_data;
-		csum_data >>= 4;
-	}
-	csum &= 0xf;
-	packet = (packet << 4) | csum;
-
-
-	int counter = 0;
-	for (int i=15; i>=0; i--)
-	{
-		if (packet & (1<<i)){
-			pwmData[counter] = 798;
-		}
-		else{
-			pwmData[counter] = 399;
-		}
-		counter++;
-	}
-
-	for (int i=19; i>=16; i--){
-		pwmData[i] = 0;
-	}
-	HAL_TIM_PWM_Start_DMA(&htim15, TIM_CHANNEL_1, (uint32_t *)pwmData, 20);
-*/
-
 }
-
-
-
 
 
 
@@ -355,31 +316,12 @@ int main(void)
   TIM15->CCR2 = 3000;
 
 /*
-  TIM15->CCR2 = 3000;
-*/
-/*
   TIM1->CCR1 = 0;
   TIM1->CCR2 = 20000;
   TIM2->CCR1 = 20000;
   TIM2->CCR2 = 0;
   TIM2->CCR3 = 0;
   TIM2->CCR4 = 20000;
-
-
-  TIM1->CCR1 = 0;
-  TIM1->CCR2 = 12000;
-  TIM2->CCR1 = 12000;
-  TIM2->CCR2 = 0;
-  TIM2->CCR3 = 12000;
-  TIM2->CCR4 = 0;
-
-
-  TIM15->CCR2 = 3000;
-  HAL_Delay(100);
-  TIM15->CCR2 = 0;
-  HAL_Delay(100);
-  TIM15->CCR2 = 3000;
-
 
   TIM1->CCR1 = 0;
   TIM1->CCR2 = 0;
@@ -390,29 +332,18 @@ int main(void)
 */
 
 
-  Thrower_Send(0);
-  //wake_drivers_up();
+  //Thrower_Send(0);
+  HAL_GPIO_WritePin(MOT_SLEEP_GPIO_Port, MOT_SLEEP_Pin, 1);
 
-  //HAL_TIM_Base_Start_IT(&htim6);
+  HAL_TIM_Base_Start_IT(&htim6);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+  while (1) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  if (driverReset) {
-
-		  /*
-	  		  driverReset = 0;
-	  		  TIM15->CCR2 = 61750;
-	  		  HAL_Delay(100);
-	  	   	  TIM15->CCR2 = 65535;
-		*/
-
-	  	  }
 
 	  	  if (isCommandReceived) { // (2)
 	  	        isCommandReceived = 0;
@@ -425,21 +356,17 @@ int main(void)
 	    	        timer = 0;
 	    	        enable_pid = 1;
 
-	  	        feedback.speed1 = motor1Control.speed; // (4)
-	  	        feedback.speed2 = motor2Control.speed;
-	  	        feedback.speed3 = motor3Control.speed;
+	  	        feedback.speed1 = motor1Control.positionChange; // (4)
+	  	        feedback.speed2 = motor2Control.positionChange;
+	  	        feedback.speed3 = motor3Control.positionChange;
 
 	  	        CDC_Transmit_FS(&feedback, sizeof(feedback)); // (5)
 	  	      }
-
-	  	//wake_drivers_up();
-	  	HAL_Delay(100);
-
   }
 
 }
   /* USER CODE END 3 */
-//}
+
 
 /**
   * @brief System Clock Configuration
