@@ -1,0 +1,6 @@
+../Core/Src/main.c:156:9:clamp	0	static
+../Core/Src/main.c:168:6:CDC_On_Receive	0	static
+../Core/Src/main.c:179:9:PIDcontrol	8	static
+../Core/Src/main.c:191:9:Thrower_Send	0	static
+../Core/Src/main.c:375:6:SystemClock_Config	88	static,ignoring_inline_asm
+../Core/Src/main.c:1135:6:Error_Handler	0	static,ignoring_inline_asm

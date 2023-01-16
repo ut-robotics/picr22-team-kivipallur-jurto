@@ -144,7 +144,6 @@ MotorControl motor3Control = {
 
 Command command = {.speed1 = 0, .speed2 = 0, .speed3 = 0, .throwerSpeed = 0, .delimiter = 0}; // (4)
 volatile uint8_t isCommandReceived = 0; // (5)
-//volatile uint8_t driverReset = 0;
 uint16_t timer = 0;
 uint16_t enable_pid = 0;
 Feedback feedback = { // (1)
@@ -177,6 +176,7 @@ void CDC_On_Receive(uint8_t* buffer, uint32_t* length) { // (6)
 }
 
 //Näite põhjal hiljem täpsusta
+
 int32_t PIDcontrol(MotorControl* control, int16_t position){
 	control->positionChange = position - control->position;
 	control->position = position;
@@ -187,16 +187,15 @@ int32_t PIDcontrol(MotorControl* control, int16_t position){
 }
 
 
-uint16_t pwmData[20];
+uint16_t Thrower_Send(uint16_t com) {
+		if (com > 6000) {
+			return 6000;
+		}
 
-void Thrower_Send (uint16_t command) {
-	if (command > 6000) {
-		return 6000;
-	} else if (command < 20) {
-		return 20;
-	}
-	return command;
-}
+		if (com < 20) {
+			return 20;
+		}
+		return com;
 
 
 
@@ -235,7 +234,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim6) {
 			motor3Control.speed = 0;
 			TIM2->CCR3 = 0;
 			TIM2->CCR4 = 0;
-			Thrower_Send(0);
+			//Thrower_Send(0);
 		}
 	}
 }
@@ -351,7 +350,6 @@ int main(void)
 	  	        motor1Control.speed = command.speed1;
 	  	        motor2Control.speed = command.speed2;
 	  	        motor3Control.speed = command.speed3;
-
 	  	        Thrower_Send(command.throwerSpeed);
 	    	        timer = 0;
 	    	        enable_pid = 1;
@@ -366,7 +364,7 @@ int main(void)
 
 }
   /* USER CODE END 3 */
-
+}
 
 /**
   * @brief System Clock Configuration
@@ -379,18 +377,20 @@ void SystemClock_Config(void)
 
   /** Configure the main internal regulator output voltage
   */
-  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
+  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1_BOOST);
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSI48
+                              |RCC_OSCILLATORTYPE_LSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+  RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV1;
-  RCC_OscInitStruct.PLL.PLLN = 18;
+  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV4;
+  RCC_OscInitStruct.PLL.PLLN = 85;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV6;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
