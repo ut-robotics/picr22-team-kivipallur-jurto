@@ -6,7 +6,7 @@ In order to be able to communicate between the computer and the mainbord. The sp
 
 Python speed send comand:
 
---- 
+---- 
 andmed = struct.pack('<hhhHBH', speed1, speed2, speed3, thrower_speed, disable_failsafe, 0xAAAA)
 ----
 
