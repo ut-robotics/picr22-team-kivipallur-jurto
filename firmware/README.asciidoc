@@ -5,10 +5,10 @@
 In order to be able to communicate between the computer and the mainbord. The speed values must be in the correct byte form.
 
 Python speed send comand:
-[]
----
+
+--- 
 andmed = struct.pack('<hhhHBH', speed1, speed2, speed3, thrower_speed, disable_failsafe, 0xAAAA)
----
+ ---
 
 * h - speed1, speed2, speed3 are int16_t
 * H - thrower_speed, disable_failsafe are uint16_t
