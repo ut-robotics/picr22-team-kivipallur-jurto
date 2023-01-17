@@ -1,7 +1,28 @@
-# Kivipallur-Jurto
+:1: https://github.com/ut-robotics/picr22-boot-camp-programming
+Our code is based on {1}[BootCampCode]
+# Kivipallu jürto
 
-Meeskonna liikmed:
-Artur Reitalu
-Kristjan Madis Kask
-Kaspar Tamm
-Priit Teelahk
+## Needed libraries for running the code
+
+Python 3.9 - https://www.python.org/downloads/release/python-390/ +
+OpenCV - https://opencv.org/ +
+NumPy - https://numpy.org/ +
+Xbox360controller - https://pypi.org/project/xbox360controller/ +
+Numba - https://numba.pydata.org/ +
+WebSocket(Client) - https://pypi.org/project/websocket-client/ +
+Pyserial - https://pypi.org/project/pyserial/ +
+Pyrealsense2 - https://pypi.org/project/pyrealsense2/ +
+Multiprocessing - https://docs.python.org/3/library/multiprocessing.html +
+
+
+## Steps to run the code.
+
+NOTE: the code can be ran without a referee server and started with a controller +
+
+[horizontal]
+1. Configuring all the colours with file config_colors.py +
+2. If a different robot is used change 
+3. Update the robotID in main.py +
+4. Update the ip and port in ref_commands.py 
+
+
