@@ -21,8 +21,10 @@ NOTE: the code can be ran without a referee server and started with a controller
 
 [horizontal]
 1. Configuring all the colours with file config_colors.py +
-2. If a different robot is used change 
+2. If a different robot is used change wheelRadius and wheelDistanceFromCenter in MainMovement.py +
 3. Update the robotID in main.py +
-4. Update the ip and port in ref_commands.py 
+4. Update the ip and port in ref_commands.py +
+5. Start up the referee server or connect a controller +
+6. Run main.py +
 
 
