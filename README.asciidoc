@@ -1,5 +1,6 @@
-:1: https://github.com/ut-robotics/picr22-boot-camp-programming
-Our code is based on {1}[BootCampCode]
+:1: https://github.com/ut-robotics/picr22-boot-camp-programming +
+Our code is based on {1}[BootCampCode] +
+
 # Kivipallu jürto
 
 ## Needed libraries for running the code
