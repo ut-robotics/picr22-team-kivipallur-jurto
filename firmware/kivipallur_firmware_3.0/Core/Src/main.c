@@ -176,7 +176,7 @@ void CDC_On_Receive(uint8_t* buffer, uint32_t* length) { // (6)
 }
 
 //Näite põhjal hiljem täpsusta
-
+// PID controller for movement.
 int32_t PIDcontrol(MotorControl* control, int16_t position){
 	control->positionChange = position - control->position;
 	control->position = position;
@@ -186,7 +186,7 @@ int32_t PIDcontrol(MotorControl* control, int16_t position){
 	return control->p_gain * error + control->i_gain * control->integraal;
 }
 
-
+//Throw speed control function
 uint16_t Thrower_Send(uint16_t com) {
 		if (com > 6000) {
 			return 6000;
@@ -196,7 +196,6 @@ uint16_t Thrower_Send(uint16_t com) {
 			return 20;
 		}
 		return com;
-
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim6) {
@@ -234,11 +233,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim6) {
 			motor3Control.speed = 0;
 			TIM2->CCR3 = 0;
 			TIM2->CCR4 = 0;
-			//Thrower_Send(0);
+			Thrower_Send(0);
 		}
 	}
 }
 
+//Drivers need a sleep signal to start working
 void wake_drivers_up() {
 	HAL_GPIO_WritePin(MOT_SLEEP_GPIO_Port, MOT_SLEEP_Pin, 0);
 		for (int i = 0; i<300; i++) {
@@ -315,6 +315,7 @@ int main(void)
   TIM15->CCR2 = 3000;
 
 /*
+  //for testing the motors
   TIM1->CCR1 = 0;
   TIM1->CCR2 = 20000;
   TIM2->CCR1 = 20000;
@@ -389,8 +390,8 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV4;
-  RCC_OscInitStruct.PLL.PLLN = 85;
+  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV1;
+  RCC_OscInitStruct.PLL.PLLN = 20;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV6;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
@@ -877,9 +878,9 @@ static void MX_TIM15_Init(void)
 
   /* USER CODE END TIM15_Init 1 */
   htim15.Instance = TIM15;
-  htim15.Init.Prescaler = 45;
+  htim15.Init.Prescaler = 49;
   htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim15.Init.Period = 65535;
+  htim15.Init.Period = 63999;
   htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim15.Init.RepetitionCounter = 0;
   htim15.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
