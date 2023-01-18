@@ -357,8 +357,8 @@ int main(void)
 
 	  	        feedback.speed1 = motor1Control.positionChange; // (4) //Mootor1
 	  	        feedback.speed2 = motor2Control.positionChange;  ////Mootor2
-	  	        //feedback.speed3 = motor3Control.positionChange;  ////Mootor3
-	  	        feedback.speed3 = command.throwerSpeed;  //Trhower
+	  	        feedback.speed3 = motor3Control.positionChange;  ////Mootor3
+
 
 	  	        CDC_Transmit_FS(&feedback, sizeof(feedback)); // (5)
 	  	      }
