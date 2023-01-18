@@ -24,7 +24,7 @@ Xbox360controller - https://pypi.org/project/xbox360controller/ +
 # Electronics
 Compared to the beginning of the course, we reduced the electronics to a smaller size. On the new mainboard motor drivers and control logic are combined to one PCB. The new board has the option of adding more motors to add more functionality to the robot. It is easier to manage cables on the new board
 
-The first fix to do is to add LEDs to the motor drivers. Another improvement is to buy new and better handling motor travers for the course.
+The first fix to do is to add LEDs to the motor drivers. Another improvement is to buy new and better handling motor drivers for the course.
 
 
 
@@ -36,6 +36,24 @@ image::/elek2.png[Board2]
 image::/elek3.png[Board3]
 
 
+# Mechanics
+
+3d-printed battery and alarm holders for the robot for better fit and alarm stability. To add a little character to our robot, we added 3d-printed Kivipallur Jürto face to the camera holder. We also added some borders to sides and back to ensure that the ball will not get stuck outside or inside of the robot. We created 3d-printed borders to thrower, that guide the ball correctly. Moved most of the cables inside of the robot. 
+Our ball thrower has a fixed throwing angle of 60 degrees. Distance between thrower sides is 42 mm, The distance between motor and ball slider ramps is 35 mm and the distance from motor to the ground is 38 mm. The sliders have cutouts for support and stability, as they sit on the bottom plate.
+Photos of our robot.
+
+image::/meh1.png[robot1]
+
+image::/meh2.png[robot2]
+
+
+
+Significant improvements can be achieved with smaller bottom and top plates. The robot did not do great in corners because of its big dimensions. Thrower clearance should be higher, because it would get stuck on some uneven surfaces. It’s more efficient to design the ball thrower with a ball holder and changeable angle, rather than a simple one. Otherwise everything worked perfectly and our robot was an improvement from the previous one. 
+
+# Programming
+
+
+# Personal comments
 
 
 == Blog
