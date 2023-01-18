@@ -187,15 +187,15 @@ int32_t PIDcontrol(MotorControl* control, int16_t position){
 }
 
 //Throw speed values
-uint16_t Thrower_Send(uint16_t com) {
+void Thrower_Send(uint16_t com) {
 		if (com > 6000) {
-			return 6000;
+			TIM15->CCR2 = 6000;
 		}
 
 		if (com < 20) {
-			return 20;
+			TIM15->CCR2 = 20;
 		}
-		return com;
+		TIM15->CCR2 = com;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim6) {
@@ -332,7 +332,6 @@ int main(void)
 */
 
 
-  //Thrower_Send(0);
   HAL_GPIO_WritePin(MOT_SLEEP_GPIO_Port, MOT_SLEEP_Pin, 1);
 
   HAL_TIM_Base_Start_IT(&htim6);
