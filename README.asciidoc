@@ -33,7 +33,7 @@ image::/elek1.png[Board1]
 
 image::/elek2.png[Board2]
 
-
+image::/elek3.png[Board3]
 
 
 
