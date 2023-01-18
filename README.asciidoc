@@ -1,0 +1,448 @@
+
+# Kivipallur-Jurto
+
+Team members: +
+Artur Reitalu +
+Kristjan Madis Kask +
+Kaspar Tamm +
+Priit Teelahk +
+
+== Fusion 360 Kivipallur Jürto
+https://a360.co/3hoEI0K
+
+== External links
+Fusion 360 CAD - https://www.autodesk.com/products/fusion-360/overview?term=1-YEAR&tab=subscription +
+Remmina - https://remmina.org/ +
+Altium PCB Design - https://www.altium.com/ +
+VNC Viewer/Server - https://www.realvnc.com/en/connect/download/viewer/ +
+OpenSSH - https://www.openssh.com/ +
+
+# Electronics
+Compared to the beginning of the course, we reduced the electronics to a smaller size. On the new mainboard motor drivers and control logic are combined to one PCB. The new board has the option of adding more motors to add more functionality to the robot. It is easier to manage cables on the new board
+
+The first fix to do is to add LEDs to the motor drivers. Another improvement is to buy new and better handling motor drivers for the course.
+
+
+
+image::/elek1.png[Board1]
+
+
+image::/elek2.png[Board2]
+
+image::/elek3.png[Board3]
+
+
+# Mechanics
+
+3d-printed battery and alarm holders for the robot for better fit and alarm stability. To add a little character to our robot, we added 3d-printed Kivipallur Jürto face to the camera holder. We also added some borders to sides and back to ensure that the ball will not get stuck outside or inside of the robot. We created 3d-printed borders to thrower, that guide the ball correctly. Moved most of the cables inside of the robot. +
+Our ball thrower has a fixed throwing angle of 60 degrees. Distance between thrower sides is 42 mm, The distance between motor and ball slider ramps is 35 mm and the distance from motor to the ground is 38 mm. The sliders have cutouts for support and stability, as they sit on the bottom plate. +
+Photos of our robot. +
+
+image::/meh1.png[robot1]
+
+image::/meh2.png[robot2]
+
+
+
+Significant improvements can be achieved with smaller bottom and top plates. The robot did not do great in corners because of its big dimensions. Thrower clearance should be higher, because it would get stuck on some uneven surfaces. It’s more efficient to design the ball thrower with a ball holder and changeable angle, rather than a simple one. Otherwise everything worked perfectly and our robot was an improvement from the previous one. 
+
+# Software
+
+## Used libraries:
+
+### OpenCV - https://opencv.org/ +
+	Opencv is used for the image processing functions and object detection through contours.
+  
+### NumPy - https://numpy.org/ +
+	Numpy allowed us to have and use more complex array processing functions for line detection.
+  
+### Xbox360controller - https://pypi.org/project/xbox360controller/ +
+	Xbox360controller library was used solely for reading Xbox 360 controller inputs.
+
+### Numba - https://numba.pydata.org/ +
+	From the Numba library we used the JIT functions,which allowed us to speed up nested loops.
+
+### WebSocket(Client) - https://pypi.org/project/websocket-client/ +
+	Websocket client was used to actually connect to the referee server.
+
+### Pyserial - https://pypi.org/project/pyserial/ +
+	Pyserial was used to comfortably receive and send commands to the microprocessor which controlled the motors.
+
+### Pyrealsense2 - https://pypi.org/project/pyrealsense2/ +
+	Pyrealsense2 gave us the tools needed to use the camera feed from our intel realsense camera to its full potential.
+
+### Multiprocessing - https://docs.python.org/3/library/multiprocessing.html +
+	Multiprocessing is used as an alternative for multithreading, since it is supposed to be more effective.
+	
+### Pickle and segment + 
+	Pickle and segment libraries were also used but they came with the bootcamp code, and pickle serialized objects and segment made color thresholding easier.
+
+
+## Code structure
+
+There were 4 main components in our code: +
+
+* state machine
+* referee listener
+* omnimotion processor
+* image processor
+
+The state machine cycled through certain states (which are listed below), it was basically the coordinator on which functions to run and what to do with certain data from image processor. +
+
+Referee listener was responsible for connecting to the referee server and constantly checking if there were new messages to forward to the state machine for it to change states and/or update basket color. +
+
+OmniMotion processor converted basic forward and side ways movement in meters per second to correct maiboard units for the motors. +
+
+Image processor is the component which analyzed camera frames and converted that info into ball, basket and line detetction
+
+[horizontal]
+Spin:: rotates to find a ball after about 1000 degrees of turning it goes into Enemy_basket_spin, if it found a ball before the goes into drive state.
+Drive:: drives towards a found ball and stops after getting to certain range and goes into orbit state, if ball is lost during it goes back to spin state.
+Orbit:: starts looking for the target basket while keeping the ball at the center of its camera(orbiting around ball), if ball is found goes into throw state, if ball is lost goes back into spin state.
+Throw:: final lineup of ball and basket and starts the throw function, if ball is lost during this time goes back into spin state.
+Controller:: if a connected controllers takeover button is pressed robot becomes controllable by controller until relinquish button is pressed.
+Enemy_basket_spin:: state similar to spin but for the enemy basket, if found goes into enemy_basket_approach.
+Enemy_basket_approach:: state to approach an enemy basket until a certain distance, if distance is reached goes back into spin state.
+
+
+
+## Game logic
+image::/blocky.png[blocky]
+
+## The Good, Bad and the ugly things i would change
+
+### The GOOD +
+
+I would say that the good things in our code were: numba jit which sped up our image processor and upped our frame rate by 10, controller integration which enabled our code to be able to be run without a referee server available and relatively more compact main.py then most.
+	
+### the BAD and the ugly i would change +
+
+The worst thing about our code is that we don't measure our distance from object other than the basket which causes us to crash into other robots and the baskets backboard. Another bad thing is that our thrower speed calculation was linear which made it hard to throw in the balls. So i would change the depth camera usage to map out certain object if they are too close and execute countermeasures, and also remeasure our throwing distances and speeds.
+
+# Personal comments
+
+### Kaspar +
+I worked on electronics design and assembly and wrote firmware for new electronics. I learned to use the Altium designer and STM32CubeIDE software. Next time I would do better to fix the schematic first before I start working on the PCB board. The collection of course materials is total chaos. The organization of the course has not been thought through. Next year's students, ask for advice from those who have passed already. Instructors must develop communication skills and the course schedule must be established before the course
+
+### Artur +
+I worked on the code together with Priit. I improved my code writing skills in python and also learnt about time management. Next time I would try to not reinvent the wheel (make everything by ourselves from scratch), but instead try to use more of what was available and already given to us (previous year’s code, instructors’ help, other teams’ help and their code examples). +
+What I liked about the course was that it’s the only course (for us thus far at least) where you can earn money and you have creative freedom. +
+What I did not like about the course was the lack of help, we got stuck on different tasks so often and it was super easy to burn out. We often just tried to fix one bug for several hours while with the instructors’ help it took only like 10 minutes to fix. The problem was that the instructors were available for only 2 lessons per week and then everybody needed their help, so there was a queue, who gets to ask them. Also the bi-weekly progress reports were extremely unnecessary and annoying in my opinion, as they just took away 25% of the sessions in which we could ask for the instructors’ help, instead we just had to watch and wait to get points. I don’t feel like it was motivating to move forward or make progress, but instead to just slow us down. +
+Suggestion for next year’s students: Start early and don’t be scared to ask for help and use what has already been done for you. +
+Suggestions for instructors: I understand that the current instructors work elsewhere and this course is like a part time job for them, but the students could really use more face-to-face consultations as slack communication is not very efficient and the in-person lessons always have such long queues to ask a question. + Maybe one more in-person lesson per week would ease the problem. +
+
+
+### Madis +
+I worked on the mechanics part of the robot. I learned to use Fusion 360 Autodesk software and how to design a functional robot from scratch. Learned how to use a mill and lathe. Next time I would look over my design a few more times to discover some mistakes I made. In this course I liked the idea of making all parts of the robot ourselves and getting a real functioning result. I didn’t like that sometimes I couldn’t continue my work, because I had to wait for supervision or the devices I had to use were in use. For future students I recommend starting early with everything and thoroughly thinking it through. For instructors I suggest to communicate more on slack, even if it's not so important, for example, if you haven’t supervised the work yet, but plan to do it in the next hours or day. It would be good to know all the issues right away, not each one with next feedback.
+
+### Priit +
+I worked together with Artur on the programmingof the robot. I learnt that cooperating with others while writing code is not always the best way, since we had many inconsistencies and problems. Next time i would definetly set out certain parts of the code i am responsible for and the other parts that my teammate is responsible for. The worst thing about the course was definetly the lack of lessons weekly which of some were completely gone for the progress presentation which actually dwarfed our progress i would say. Everything else in the course was great. Suggestions for other student would definetly be that try to complete the code and the robot by the 1st of December or even earlier, since building the new robot brings alot of new variables which could absolutely take all of your time away.
+The instructors were very friendly and knowledgeable. There were some weird rules about formatting weekly reports, but other then that i have no personal quarrels.
+
+
+== Blog
+
+=== Sunday 2022-09-04
+
+*Kaspar:* Soldered mainboard.  (2h) +
+*Madis:* Assembled test robot. (1h) +
+
+=== Wednesday 2022-09-07
+
+*Priit:* Established a VNC Connection.  (2h) +
+*Artur:* Helped with the VNC Connection.  (2h) +
+
+=== Thursday 2022-09-08
+
+*Kaspar:* Added heatshrink to cables. Connected a second powerswitch, which was missing.  (1.5h) +
+*Priit:* Established communication with the mainboard.  (3.5h) +
+*Artur:* Helped with Establishing a connection with the mainboard.  (3.5h) +
+
+=== Monday 2022-09-12
+
+*Madis:* Started designing the thrower. (5h) +
+*Priit:* Attempted to establish a ssh connection, but didn t have much luck.  (2h) +
+*Artur:* Also tried to get the ssh working to no avail.  (3.5h) +
+*Kaspar:* Was writing an Estonian more throrough blog.  (1.5h) +
+
+=== Thursday 2022-09-15
+
+*Madis:* Finished designing the thrower. (5h) +
+*Priit:* Got ssh working  (2h) +
+*Artur:* Helped and celebrated getting ssh working.  (2h) +
+*Kaspar:* Started doing the presentation.  (1.5h) +
+
+=== Monday 2022-09-19
+
+*Everyone except Madis:* Presented the presentation and listened to other teams. (3h) +
+
+=== Thursday 2022-09-22
+
+*Priit:* successfully opened the camera and tried different ways of detecting the balls. (4h) +
+*Artur:* finsished the ball detection and we settled for the conture route (3h) +
+*Kaspar:* Got Altium working and familiarised himself with the different components we could use.  (1.5h) +
+*Madis:* Started with CAM, but ran into some problems with arrange (1h) +
+
+=== Saturday 2022-09-24
+*Madis:* Finished Fusion 360 CAM and waiting for supervision. (2h) +
+
+=== Monday 2022-09-26
+
+*Priit:* Helped with researching the code and main ball mover and carrier. (2h) +
+*Artur:* Polished our ball detection software. Started developing the moving based on the closest balls x coordinate. (2h) +
+*Kaspar:* Updated Project manager excel file, attached the NUC with screws to the test robot. Also photographed our accomplishments.  (2h) +
+
+
+=== Wednesday 2022-09-28
+
+*Artur:* Worked on robot movement. (2h) +
+
+=== Thursday 2022-09-29
+*Priit:* Broke the VNC Viewer tried different programs, but ended up back at VNC Viewer. (4h) +
+*Kaspar:* Assisted with research on VNC Viewers. Worked on presentation slides, charged lipo batteries  (2h) +
+
+
+=== Sunday 2022-10-02
+*Priit:* reviewed the slides. (1h) +
+*Kaspar:* reviewed the slides. (1h) +
+*Artur:* reviewed the slides. (1h) +
+*Madis:* reviewed the slides. (1h) +
+
+
+=== Monday 2022-10-03
+*Madis:* Resolved 2D Pocket and Contour issues with Fusion 360 CAM. Got positive feedback and milled the details. Presented the project status. (5h) +
+*Priit:* Presented the project status. (1h) +
+*Kaspar:* Presented the project status. (1h) +
+*Artur:* Presented the project status. (1h) +
+
+=== Thursday 2022-10-6
+*Priit:* coded an alpha version of the code to track and follow the ball. (4h) +
+*Artur:* helped to code and test the track and follow code.(2h) +
+*Madis:* Modified robot and thrower, finally assembled thrower as well. (3h) +
+*Kaspar:* Looking pcb components for Altium. (2h) + 
+
+=== Friday 2022-10-7
+*Kaspar:* Worked on motor driver and controller pcb schematic. (7h) +
+
+=== Monday 2022-10-10
+*Artur:* Worked on the robot motion program. (3h) +
+
+=== Thursday 2022-10-13
+*Priit:* Worked on the robot motion program and filmed robot moving in the field. (3h) +
+*Kaspar:* Worked on slides and project plan, helped Priit debug the motion program. (3h) + 
+*Madis:* Worked on the robot's wheel design. (3h) +
+
+=== Sunday 2022-10-16
+*Priit:* reviewed the slides. (1h) +
+*Kaspar:* reviewed the slides. (1h) +
+*Artur:* reviewed the slides. (1h) +
+*Madis:* reviewed the slides. (1h) +
+
+=== Monday 2022-10-17
+*Priit:* Presented the project status. Did some coding. (4h) +
+*Kaspar:* Presented the project status. Prepared the robot for the test robot presentation. (4h) +
+*Artur:* Presented the project status. Did some coding. (4h) +
+*Madis:* Presented the project status. Prepared the robot for the test robot presentation. (4h) +
+
+=== Thursday 2022-10-20
+*Madis:* Finished designing omniwheels and waiting for feedback. (4h) +
+
+=== Friday 2022-10-21
+*Madis:* Designed motor mounts and created assembly with omniwheel, motor holder and motor. (2h) +
+*Kaspar:* Worked on motor driver and controller pcb schematic. (4h) +
+
+=== Sunday 2022-10-23
+*Artur:* Worked on the movement and image processing parts of the code. (3h) +
+*Madis:* Fixed issues with motor mounts. (1h) +
+*Kaspar:* Worked on motor driver and controller pcb schematic. (8h) +
+
+=== Monday 2022-10-24
+*Madis:* Used lathe to make three aluminum wheel-motor mounts. Next step is to clean them and drill holes. (4h) +
+*Artur:* Improved our state machine code. (3h) +
+*Priit:* Did some coding. (2h) +
+*Kaspar:* Helped Priit with coding. (2h) +
+
+=== Wednesday 2022-10-26
+*Priit:* Struggled with classes and serial. (5h) +
+*Madis:* Finished wheel-motor mounts. (2h) +
+*Kaspar:* Experimented with the robot's ball throwing ability. (1h)+
+
+=== Thursday 2022-10-27
+*Priit:* Got the serial working and ironed out classes issue. (2h) +
+*Artur:* Helped with debugging our issues. (2h) +
+
+=== Friday 2022-10-28
+*Priit:* Implemented primitive orbit and throwing functions. (4h) +
+*Kaspar:* Worked on motor driver and controller pcb schematic. (4h) +
+*Madis:* Started with camera holder design (2h) +
+
+=== Saturday 2022-10-29
+*Priit:* Improved orbit function. Also implemented depth camera distance. Fixed bugs (2h) +
+*Kaspar:* Worked on motor driver and controller pcb schematic. (4h) +
+
+=== Sunday 2022-10-30
+*Priit:* reviewed the slides. (1h) +
+*Madis:* reviewed the slides. (1h) +
+*Artur:* reviewed the slides. (1h) +
+*Kaspar:* reviewed the slides.Fixed feedback points and started pcb design (6h) +
+
+=== Monday 2022-10-31
+*Priit:* Presented the project status. (2h) +
+*Kaspar:* Presented the project status. (2h) +
+*Artur:* Presented the project status. (2h) +
+*Madis:* Presented the project status. (2h) +
+
+=== Thursday 2022-11-03
+*Madis:* Designed new thrower. (3h) +
+*Priit:* Developed a badly hardcoded throwing code. (3h) +
+*Artur:* Worked on the robot program. (3h) +
+
+=== Friday 2022-11-04
+*Madis:* Started with new robot design (3h) +
+*Kaspar:* Worked on pcb schematic and implemented suggested fixes (4h) +
+
+=== Saturday 2022-11-05
+*Kaspar:* Worked on pcb schematic and implemented suggested fixes (5h) +
+
+=== Sunday 2022-11-06
+*Madis:* Designed new robot upper plate and started to assemble new robot in Autocad (2h) +
+*Kaspar:* Worked on pcb schematic and implemented suggested fixes (4h) +
+
+=== Monday 2022-11-07
+*Priit:* Fixed the hardcoded throwing code and added plastic fangs to help ball alignment (2h) +
+*Kaspar:* Helped test the robot's ball throwing (2h) +
+*Artur:* Improved new code. (2h) +
+
+=== Tuesday 2022-11-08
+*Madis:* Designed new robot. Added borders to bottom plate. (2h) +
+
+=== Thursday 2022-11-10
+*Priit:* Participated in the first test competition (5h) +
+*Madis:* Participated in the first test competition (5h) +
+*Artur:* Participated in the first test competition (5h) +
+*Kaspar:* Participated in the first test competition (5h) +
+
+=== Friday 2022-11-11
+*Kaspar:* Fixed feedback points and started pcb design (3h) +
+
+=== Saturday 2022-11-12
+*Kaspar:* Received schematic feedback and finalized the new component placement (4h)
+
+=== Sunday 2022-11-13
+*Priit:* reviewed the slides. (1h) +
+*Madis:* reviewed the slides. (1h) +
+*Artur:* reviewed the slides. (1h) +
+*Kaspar:* reviewed the slides. Improved component placement (4h) +
+
+=== Monday 2022-11-14
+*Priit:* presented progress (2h) +
+*Madis:* presented progress (2h) +
+*Artur:* presented progress (2h) +
+*Kaspar:* presented progress (2h) +
+
+=== Thursday 2022-11-17
+*Priit:* Worked on remote control (2h) +
+*Madis:* Worked on the robot design (2h) +
+*Artur:* Worked on remote control (2h) +
+*Kaspar:* Worked on pcb the design (2h) +
+
+=== Saturday 2022-11-19
+*Kaspar:* Received schematic feedback and Worked on pcb the design (5h) +
+
+=== Monday 2022-11-21
+*Madis:* Designed new robot. Need to add NUC (4h) +
+*Kaspar:* Received schematic feedback and Worked on pcb the design (4h) +
+*Priit:* Worked on the ref commands (3h) +
+*Artur:* Worked on the ref commands (3h) +
+
+=== Tuesday 2022-11-22
+*Madis:* Finished Designing new robot. Waiting for feedback (2h) +
+
+=== Wednesday 2022-11-23
+*Kaspar:* Received schematic feedback and Worked on pcb the design (4h) +
+*Priit:* prepared the robot for the test competition (3h) +
+*Artur:* prepared the robot for the test competition (3h) +
+
+=== Thursday 2022-11-24
+*Priit:* Participated in the second test competition (5h) +
+*Madis:* Participated in the second test competition (2h) +
+*Artur:* Participated in the second test competition (5h) +
+
+=== Friday 2022-11-25
+*Kaspar:* Received schematic feedback and Worked on pcb design (2h) +
+
+=== Saturday 2022-11-26
+*Kaspar:* Prepared the pcb files to order the board (1h) +
+
+=== Sunday 2022-11-27
+*Priit:* reviewed the slides. (1h) +
+*Madis:* reviewed the slides. (1h) +
+*Artur:* reviewed the slides. (1h) +
+*Kaspar:* reviewed the slides. (1h) +
+
+=== Monday 2022-11-28
+*Madis:* Presented progress (2h) +
+*Kaspar:* Presented progress (2h) +
+
+=== Wednesday 2022-11-30
+*Madis:* 3D printed omni wheel and battery holder for testing (2h) +
+*Priit:* Learned how to use github encryption keys (1h) +
+
+=== Thursday 2022-12-01
+*Madis:* Created CAM for milling new robot. Got feedback and milled new robot (5h) +
+*Priit:* Added code for controller integration (4h) +
+
+=== Sunday 2022-12-04
+*Kaspar:* Worked on firmware (2h) +
+
+=== Monday 2022-12-05
+*Madis:* Assembled new robot chassis. Need to 3D print one more omni wheel. (4h) +
+*Priit:* fixed issues with code (3h) +
+*Kaspar:* Worked on firmware  (2h) +
+  
+=== Wednesday 2022-12-07
+*Priit:* tested code on new robot, and tried coding firmware (6h) +
+*Artur:* tested code on new robot, and tried coding firmware (6h) +
+*Madis:* Assembled new robot (3h) +
+*Kaspar:* Soldered our electronics (14h) +
+
+=== Thursday 2022-12-08
+*Priit:* tried writing a patrol function and wrote line detection kinda also participated in test competition (8h) +
+*Madis:* fixed robot wheel and camera mount also participated in test competition (4h) +
+*Artur:* thresholded and helped debugging and fix code also participated in test competition (5h) +
+*Kaspar:* Added 3d printed electronics protection shell (3h) +
+
+=== Saturday 2022-12-10
+*Kaspar:* Worked on firmware  (5h) +
+
+=== Sunday 2022-12-11
+*Priit:* reviewed the slides. (1h) +
+*Madis:* reviewed the slides. (1h) +
+*Artur:* reviewed the slides. (1h) +
+*Kaspar:* reviewed the slides and Worked on firmware . (3h) +
+
+=== Monday 2022-12-12
+*Priit:* optimized robot movement (5h) +
+*Madis:* fixed robot thrower intake problems (5h) +
+*Kaspar:* debugged our firmware (5h) +
+*Artur:* helped with coding (2h) +
+
+=== Wednesday 2022-12-14
+*Madis:* Designed thrower with changeable throwing angle (4h) +
+
+=== Thursday 2022-12-15
+*Priit:* Improved the code (2h) +
+*Madis:* fixed some problems with sheels and cleaned them (5h) +
+*Kaspar:* Worked on electronics (15h) +
+*Artur:* Worked on the code (2h) +
+
+=== Friday 2022-12-16
+*Priit:* Participated in DeltaX competition (4h) +
+*Madis:* Participated in DeltaX competition (4h) +
+*Kaspar:* Participated in DeltaX competition (4h) +
+*Artur:* Participated in DeltaX competition (4h) +
+
+=== Saturday 2022-12-17
+*Priit:* Participated in course competition (4h) +
+*Kaspar:* Participated in course competition (4h) +
+*Artur:* Participated in course competition (4h) +

@@ -1,0 +1,13 @@
+10.10.2022
+improved omnimotion code and removed the thrower, because we discovered a slight flaw with 
+its design where you could not connect the HDMI cable with the MOC anymore, as the thrower's
+corner was in the way. We will probably have to cut a piece out of the thrower, mount the MOC
+a bit differently or find a new way to establish display connection with the robot.
+
+13.10.2022
+Prandasime roboti liikumise koodi, arutasime rataste disaini üle, saime roboti liikuma, 
+filmisime, kuidas robot platsi peal palli järgi liigub. Lõime järgmise nädals esitlus 
+slaidide kondi kava.
+
+16.10.2022
+Vaatasime üle eesiyluse slaidid

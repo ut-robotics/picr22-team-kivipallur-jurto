@@ -1,0 +1,11 @@
+07.11.2022 - 09.11.2022
+
+Tegime roboti peenhälestust, et valmis olla esimeseks test võistlusekss.
+
+10.11.2022
+
+Osalesime esimesel test võistlusel ja saime kõigis formaatides teise koha.
+
+11.11.2022 - 13.11.2022
+
+Töötasime uues roboti disaini ja pcb disaini kallal. Lõime esitluste salidid.

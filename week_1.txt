@@ -1,0 +1,23 @@
+Esimene nädal.
+
+01.09.2022
+Saime ülevaate, mida me peame selle õppe aine puhul saavutama. Näitati elnevaid 
+roboteid ja räägiti kuidass näeb välja krvpalli mäng.
+
+03.09.2022 kuni 04.09.2022
+Toimus laager, kus saime oskuseid, mida on vaja selle kursuse jooksul. Esimesel
+päeval toimusid töötoad, milleks oli jootmine, mehaanika ja programeerimine.
+Töötubade eesmärk oli tutvuda erinevate töödega, mida robotit ehitades tleb teha.
+
+Teine päev algas loenguga, kus räägiti kursuse korralddusest ja roboti mängu 
+reeglitest. See järel moodustasime enda võistluse tiimi ja läksime koos orjenteeruma, 
+mille käigus liikusime erinevate punktide vahel kesklinnas. Peale orjenteerumist
+toimus loeng, kus rägiti aine punkti süsteemist. Lisaks toimus võistluseks valmistumise 
+esmamuliete jagamine võistluse reklaamiks. Päeva teises pooles sime käte oma roboti
+komlpektid, mis jaksti orjenteerumise tulemuste põhjal. Saime valida endale komplekti 
+kolmandana, kuna saime orjenteerumises teise koha.
+
+Päeva lõpuks ühendasime ära enda roboti elektroonika ja ehitasime testroboti kokku.
+
+
+ 

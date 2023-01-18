@@ -1,0 +1,4 @@
+28.11.2022 - 04.12.2022
+
+Nädala jooksul täiustasime roboti koodi lisasime mustade joonte tuvastuse. Alustasime püsivara katsetustega. 
+Freesisime välju uue roboti kere.
