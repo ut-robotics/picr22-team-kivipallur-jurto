@@ -23,6 +23,21 @@ andmed = struct.pack('<hhhHBH', speed1, speed2, speed3, thrower_speed, disable_f
 
 * To recieve data from mainboard, the python program has to read that from serial. After reding the data can be printed
 
+* Mainboard returns feedback struct variables
+** int16_t speed1
+*** returns Mootor1 feedback
+** int16_t speed2
+*** returns Mootor2 feedback
+** int16_t speed3
+*** returns Trhower feedback
+** uint16_t delimiter
+*** delimiter value 0xAAAA
+
+
+
+
+
+
 
 
 
