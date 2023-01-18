@@ -25,11 +25,11 @@ andmed = struct.pack('<hhhHBH', speed1, speed2, speed3, thrower_speed, disable_f
 
 * Mainboard returns feedback struct variables
 ** int16_t speed1
-*** returns Mootor1 feedback
+*** returns Motor1 feedback
 ** int16_t speed2
-*** returns Mootor2 feedback
+*** returns Motor2 feedback
 ** int16_t speed3
-*** returns Mootor3 feedback
+*** returns Motor3 feedback
 ** uint16_t delimiter
 *** delimiter value 0xAAAA
 
