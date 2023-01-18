@@ -292,13 +292,13 @@ int main(void)
   MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_2); //Trhower
   //HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2); //Mootor1
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1); //Mootor2
   //HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
   //HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4); //Mootor3
 
   HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_1 | TIM_CHANNEL_2);
   //HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_2);
@@ -357,7 +357,8 @@ int main(void)
 
 	  	        feedback.speed1 = motor1Control.positionChange; // (4)
 	  	        feedback.speed2 = motor2Control.positionChange;
-	  	        feedback.speed3 = motor3Control.positionChange;
+	  	        //feedback.speed3 = motor3Control.positionChange;
+	  	        feedback.speed3 = command.throwerSpeed;
 
 	  	        CDC_Transmit_FS(&feedback, sizeof(feedback)); // (5)
 	  	      }
