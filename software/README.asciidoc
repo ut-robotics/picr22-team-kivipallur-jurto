@@ -1,5 +1,5 @@
 :1: https://github.com/ut-robotics/picr22-boot-camp-programming +
-Our code is based on {1}[BootCampCode] +
+:2: https://github.com/ut-robotics/robot-basketball-manager +
 
 # Kivipallu jürto
 
@@ -19,6 +19,9 @@ Multiprocessing - https://docs.python.org/3/library/multiprocessing.html +
 ## Steps to run the code.
 
 NOTE: the code can be ran without a referee server and started with a controller +
+      Our code is based on {1}[BootCampCode] +
+      referee server ca be found from {2}[HERE] +
+
 
 [horizontal]
 1. Configuring all the colours with file config_colors.py +
