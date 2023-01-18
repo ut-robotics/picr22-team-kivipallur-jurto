@@ -379,22 +379,26 @@ I worked on the mechanics part of the robot. I learned to use Fusion 360 Autodes
 *Kaspar:* debugged our firmware (5h) +
 *Artur:* helped with coding (2h) +
 
+=== Tuesday 2022-11-22
+*Kaspar:* Worked on electronics (2h) +
+
 === Wednesday 2022-12-14
 *Madis:* Designed thrower with changeable throwing angle (4h) +
+*Kaspar:* Worked on electronics (15h) +
 
 === Thursday 2022-12-15
 *Priit:* Improved the code (2h) +
 *Madis:* fixed some problems with sheels and cleaned them (5h) +
-*Kaspar:* Worked on electronics (15h) +
+*Kaspar:* Worked on electronics (17h) +
 *Artur:* Worked on the code (2h) +
 
 === Friday 2022-12-16
 *Priit:* Participated in DeltaX competition (4h) +
 *Madis:* Participated in DeltaX competition (4h) +
-*Kaspar:* Participated in DeltaX competition (4h) +
+*Kaspar:* Participated in DeltaX competition and improved electronics (24h) +
 *Artur:* Participated in DeltaX competition (4h) +
 
 === Saturday 2022-12-17
 *Priit:* Participated in course competition (4h) +
-*Kaspar:* Participated in course competition (4h) +
+*Kaspar:* Participated in course competition and improved electronics(8h) +
 *Artur:* Participated in course competition (4h) +
