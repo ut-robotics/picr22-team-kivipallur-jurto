@@ -19,6 +19,25 @@ OpenCV - https://opencv.org/ +
 NumPy - https://numpy.org/ +
 Xbox360controller - https://pypi.org/project/xbox360controller/ +
 
+
+
+# Electronics
+Compared to the beginning of the course, we reduced the electronics to a smaller size. On the new mainboard motor drivers and control logic are combined to one PCB. The new board has the option of adding more motors to add more functionality to the robot. It is easier to manage cables on the new board
+
+The first fix to do is to add LEDs to the motor drivers. Another improvement is to buy new and better handling motor travers for the course.
+
+
+
+image::/elek1.png[Board1]
+
+
+image::/elek2.png[Board2]
+
+
+
+
+
+
 == Blog
 
 === Sunday 2022-09-04
