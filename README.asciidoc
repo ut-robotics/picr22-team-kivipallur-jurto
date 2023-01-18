@@ -45,7 +45,7 @@ image::/meh2.png[robot2]
 
 Significant improvements can be achieved with smaller bottom and top plates. The robot did not do great in corners because of its big dimensions. Thrower clearance should be higher, because it would get stuck on some uneven surfaces. It’s more efficient to design the ball thrower with a ball holder and changeable angle, rather than a simple one. Otherwise everything worked perfectly and our robot was an improvement from the previous one. 
 
-# Programming
+# Software
 
 ## Used libraries:
 
@@ -72,8 +72,41 @@ Significant improvements can be achieved with smaller bottom and top plates. The
 
 ### Multiprocessing - https://docs.python.org/3/library/multiprocessing.html +
 	Multiprocessing is used as an alternative for multithreading, since it is supposed to be more effective.
+	
+### Pickle and segment + 
+	Pickle and segment libraries were also used but they came with the bootcamp code, and pickle serialized objects and segment made color thresholding easier.
 
-## Game Logic 
+
+## Code structure
+
+There were 4 main components in our code: +
+
+* state machine
+* referee listener
+* omnimotion processor
+* image processor
+
+The state machine cycled through certain states (which are listed below), it was basically the coordinator on which functions to run and what to do with certain data from image processor. +
+
+Referee listener was responsible for connecting to the referee server and constantly checking if there were new messages to forward to the state machine for it to change states and/or update basket color. +
+
+OmniMotion processor converted basic forward and side ways movement in meters per second to correct maiboard units for the motors. +
+
+Image processor is the component which analyzed camera frames and converted that info into ball, basket and line detetction
+
+[horizontal]
+Spin:: rotates to find a ball after about 1000 degrees of turning it goes into Enemy_basket_spin, if it found a ball before the goes into drive state.
+Drive:: drives towards a found ball and stops after getting to certain range and goes into orbit state, if ball is lost during it goes back to spin state.
+Orbit:: starts looking for the target basket while keeping the ball at the center of its camera(orbiting around ball), if ball is found goes into throw state, if ball is lost goes back into spin state.
+Throw:: final lineup of ball and basket and starts the throw function, if ball is lost during this time goes back into spin state.
+Controller:: if a connected controllers takeover button is pressed robot becomes controllable by controller until relinquish button is pressed.
+Enemy_basket_spin:: state similar to spin but for the enemy basket, if found goes into enemy_basket_approach.
+Enemy_basket_approach:: state to approach an enemy basket until a certain distance, if distance is reached goes back into spin state.
+
+
+
+## Game logic
+image::/blocky.png[blocky]
 
 # Personal comments
 
@@ -379,26 +412,22 @@ I worked on the mechanics part of the robot. I learned to use Fusion 360 Autodes
 *Kaspar:* debugged our firmware (5h) +
 *Artur:* helped with coding (2h) +
 
-=== Tuesday 2022-11-22
-*Kaspar:* Worked on electronics (2h) +
-
 === Wednesday 2022-12-14
 *Madis:* Designed thrower with changeable throwing angle (4h) +
-*Kaspar:* Worked on electronics (15h) +
 
 === Thursday 2022-12-15
 *Priit:* Improved the code (2h) +
 *Madis:* fixed some problems with sheels and cleaned them (5h) +
-*Kaspar:* Worked on electronics (17h) +
+*Kaspar:* Worked on electronics (15h) +
 *Artur:* Worked on the code (2h) +
 
 === Friday 2022-12-16
 *Priit:* Participated in DeltaX competition (4h) +
 *Madis:* Participated in DeltaX competition (4h) +
-*Kaspar:* Participated in DeltaX competition and improved electronics (24h) +
+*Kaspar:* Participated in DeltaX competition (4h) +
 *Artur:* Participated in DeltaX competition (4h) +
 
 === Saturday 2022-12-17
 *Priit:* Participated in course competition (4h) +
-*Kaspar:* Participated in course competition and improved electronics(8h) +
+*Kaspar:* Participated in course competition (4h) +
 *Artur:* Participated in course competition (4h) +
