@@ -15,11 +15,6 @@ Remmina - https://remmina.org/ +
 Altium PCB Design - https://www.altium.com/ +
 VNC Viewer/Server - https://www.realvnc.com/en/connect/download/viewer/ +
 OpenSSH - https://www.openssh.com/ +
-OpenCV - https://opencv.org/ +
-NumPy - https://numpy.org/ +
-Xbox360controller - https://pypi.org/project/xbox360controller/ +
-
-
 
 # Electronics
 Compared to the beginning of the course, we reduced the electronics to a smaller size. On the new mainboard motor drivers and control logic are combined to one PCB. The new board has the option of adding more motors to add more functionality to the robot. It is easier to manage cables on the new board
@@ -52,8 +47,49 @@ Significant improvements can be achieved with smaller bottom and top plates. The
 
 # Programming
 
+## Used libraries:
+
+### OpenCV - https://opencv.org/ +
+	Opencv is used for the image processing functions and object detection through contours.
+  
+### NumPy - https://numpy.org/ +
+	Numpy allowed us to have and use more complex array processing functions for line detection.
+  
+### Xbox360controller - https://pypi.org/project/xbox360controller/ +
+	Xbox360controller library was used solely for reading Xbox 360 controller inputs.
+
+### Numba - https://numba.pydata.org/ +
+	From the Numba library we used the JIT functions,which allowed us to speed up nested loops.
+
+### WebSocket(Client) - https://pypi.org/project/websocket-client/ +
+	Websocket client was used to actually connect to the referee server.
+
+### Pyserial - https://pypi.org/project/pyserial/ +
+	Pyserial was used to comfortably receive and send commands to the microprocessor which controlled the motors.
+
+### Pyrealsense2 - https://pypi.org/project/pyrealsense2/ +
+	Pyrealsense2 gave us the tools needed to use the camera feed from our intel realsense camera to its full potential.
+
+### Multiprocessing - https://docs.python.org/3/library/multiprocessing.html +
+	Multiprocessing is used as an alternative for multithreading, since it is supposed to be more effective.
+
+## Game Logic 
 
 # Personal comments
+
+### Kaspar +
+I worked on electronics design and assembly and wrote firmware for new electronics. I learned to use the Altium designer and STM32CubeIDE software. Next time I would do better to fix the schematic first before I start working on the PCB board. The collection of course materials is total chaos. The organization of the course has not been thought through. Next year's students, ask for advice from those who have passed already. Instructors must develop communication skills and the course schedule must be established before the course
+
+### Artur +
+I worked on the code together with Priit. I improved my code writing skills in python and also learnt about time management. Next time I would try to not reinvent the wheel (make everything by ourselves from scratch), but instead try to use more of what was available and already given to us (previous year’s code, instructors’ help, other teams’ help and their code examples). +
+What I liked about the course was that it’s the only course (for us thus far at least) where you can earn money and you have creative freedom. +
+What I did not like about the course was the lack of help, we got stuck on different tasks so often and it was super easy to burn out. We often just tried to fix one bug for several hours while with the instructors’ help it took only like 10 minutes to fix. The problem was that the instructors were available for only 2 lessons per week and then everybody needed their help, so there was a queue, who gets to ask them. Also the bi-weekly progress reports were extremely unnecessary and annoying in my opinion, as they just took away 25% of the sessions in which we could ask for the instructors’ help, instead we just had to watch and wait to get points. I don’t feel like it was motivating to move forward or make progress, but instead to just slow us down. +
+Suggestion for next year’s students: Start early and don’t be scared to ask for help and use what has already been done for you. +
+Suggestions for instructors: I understand that the current instructors work elsewhere and this course is like a part time job for them, but the students could really use more face-to-face consultations as slack communication is not very efficient and the in-person lessons always have such long queues to ask a question. + Maybe one more in-person lesson per week would ease the problem. +
+
+
+### Madis +
+I worked on the mechanics part of the robot. I learned to use Fusion 360 Autodesk software and how to design a functional robot from scratch. Learned how to use a mill and lathe. Next time I would look over my design a few more times to discover some mistakes I made. In this course I liked the idea of making all parts of the robot ourselves and getting a real functioning result. I didn’t like that sometimes I couldn’t continue my work, because I had to wait for supervision or the devices I had to use were in use. For future students I recommend starting early with everything and thoroughly thinking it through. For instructors I suggest to communicate more on slack, even if it's not so important, for example, if you haven’t supervised the work yet, but plan to do it in the next hours or day. It would be good to know all the issues right away, not each one with next feedback.
 
 
 == Blog
