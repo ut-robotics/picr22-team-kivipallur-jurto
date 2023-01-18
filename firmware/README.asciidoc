@@ -1,3 +1,4 @@
+
 = Kivipallur Jurto firmware
 
 == Data to mainbord
@@ -20,6 +21,7 @@ andmed = struct.pack('<hhhHBH', speed1, speed2, speed3, thrower_speed, disable_f
 * Feedback was not neede for Kivipallur Jurtos software
 * Kivipallur Jurtos firmware has feedback support
 
+* To recieve data from mainboard, the python program has to read that from serial. After reding the data can be printed.
 
 
 

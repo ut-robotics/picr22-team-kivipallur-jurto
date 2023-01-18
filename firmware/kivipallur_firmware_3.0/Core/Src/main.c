@@ -196,7 +196,7 @@ uint16_t Thrower_Send(uint16_t com) {
 			return 20;
 		}
 		return com;
-
+}
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim6) {
 	if (enable_pid == 1){
@@ -365,7 +365,7 @@ int main(void)
 
 }
   /* USER CODE END 3 */
-}
+//}
 
 /**
   * @brief System Clock Configuration
