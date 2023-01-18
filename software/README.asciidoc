@@ -20,7 +20,7 @@ Multiprocessing - https://docs.python.org/3/library/multiprocessing.html +
 
 NOTE: the code can be ran without a referee server and started with a controller +
       Our code is based on {1}[BootCampCode] +
-      referee server ca be found from {2}[HERE] +
+      referee server can be found from {2}[HERE] +
 
 
 [horizontal]
