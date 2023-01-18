@@ -1,0 +1,8 @@
+03.10.2022
+Tegime ära enda roboti esitluse. lõikasime väla viskaja ja 3d printisime
+
+06.10.2022
+viskaja sai kinnitatud roboti külge ja koodi parandused, altiumi komponentide otsimine
+
+07.10.2022
+Koostasime mootori draimerite skkemi ja alustasime plaadi kontriolleri skeemiga.

@@ -1,0 +1,8 @@
+24.10.2022
+Treisime välja mootorite külge käivad ratta hoidjad. parandasime roboti koodis olevaid vigu.
+
+26.10.2022
+Parandasime kuhjunud probleeme.
+
+27-30.10.2022
+Töötasime koodi ja trükiplaadi dissaini kallal.
