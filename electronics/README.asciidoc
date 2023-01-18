@@ -1,0 +1,105 @@
+= Kivipallur Jurto electronics documentation
+
+== Kivipallur Jurto mainboard functionality
+
+* Mainboard consists of 2 separate isolated schematics: 
+** Logic schematic with is powered with USB source
+** Motor drivers schematic is powered with lithium ion battery
+
+* Communication between the mainboard STM32 controller and computer is through microUSB
+
+* Mainboard is programmable with STLINK-V3 mainboard has for that Samtec connector
+
+* Mainboard has 7 MicroMatch connectors: 
+** 3 for movement motor encoders (m_1; m_2; m_3)
+** 1 for Thrower motor (Viskaja)
+** 1 for Throwing angle adjust servo motor (Pl_S)
+** 1 for Ball holder servo motor (Pl_H)
+** 1 for Ball sensor
+
+* Mainboard has 2 voltage regulators 
+** Logic schematic to turn 5V to 3.3V 
+** Motor drivers schematic to turn 16V to 5V
+
+* Mainboard has 3 drivers (DRV8243HQRXYRQ1) for controlling motors (M_1; M_2; M_3). With these drivers we can control 3 brushed DC motors at the same time
+
+* Motor drivers input voltage is limited with capacitors that are connected to the drivers. Capacitors that are used have 25V rating, technically the maxium voltage is 25V. But the robot uses 4 cell lithium ion battery's that have voltage up to 16.8V. The current coming out of motor drivers is limited with resistors that are connected to the ITRIP pin and IPROPI pins
+** ITRIP pin is connected with 47k resistor, that sets Voltage to 2.31V
+** IPROPI pin is connected with 2.7k resistor, then the current is limited to 2.63A.
+
+* Motor drivers are controlled through 1 PWM signals and one direction signal.
+
+* Motor drivers need nSLEEP pulse to initialize
+
+* Motor drivers SR pin for slew rate with 47k resistor. High slew rate is better for efficiency, but you have to be careful with slew rate configuration it has caused problems in previous years
+
+* Motor drivers DRVOFF pin to put the driver on standby 
+
+== Connector pinouts
+
+=== Logic schematic
+
+* (J7) Programmer connector
+** pin 1 +3.3V
+** pin 2 Debug SWDIO
+** pin 3 GND
+** pin 4 Debug SWCLIK
+** pin 5 GND
+** pin 6 not used
+** pin 7 not used
+** pin 8 not used
+** pin 9 GND
+** pin 10 Debug NRST
+
+* (J8) Motor 1 encoder (m_1)
+** pin 1 GND
+** pin 2 +3.3V
+** pin 3 Mikro-m1-en1
+** pin 4 Micro-m1-en2
+
+* (J10) Motor 2 encoder (m_2)
+** pin 1 GND
+** pin 2 +3.3V
+** pin 3 Mikro-m2-en1
+** pin 4 Micro-m2-en2
+
+* (J12) Motor 3 encoder (m_3)
+** pin 1 GND
+** pin 2 +3.3V
+** pin 3 Mikro-m3-en1
+** pin 4 Micro-m3-en2
+
+* (J13) Ball sensor
+** pin 1 GND
+** pin 2 +5V_USB
+** pin 3 not used
+** pin 4 LED_B2
+
+
+=== Motor drivers schematic
+
+* Lithium ion battery connection
+** J16 is for + connection
+** J17 is for - connection
+
+* (J14) Thrower connector (Viskaja)
+** pin 1 GND
+** pin 2 Viskaja_Mootor
+** pin 3 not used
+** pin 3 not used
+
+* (J9) Ball holder connector (Pl_H)
+** pin 1 +5V
+** pin 2 Palli_H
+** pin 3 GND
+** pin 4 not used
+
+* (J11) Throwing angle connector (Pl_S)
+** pin 1 +5V
+** pin 2 Palli_S
+** pin 3 GND
+** pin 4 not used
+
+
+
+  
