@@ -108,6 +108,16 @@ Enemy_basket_approach:: state to approach an enemy basket until a certain distan
 ## Game logic
 image::/blocky.png[blocky]
 
+## The Good, Bad and the ugly things i would change
+
+### The GOOD +
+
+I would say that the good things in our code were: numba jit which sped up our image processor and upped our frame rate by 10, controller integration which enabled our code to be able to be run without a referee server available and relatively more compact main.py then most.
+	
+### the BAD and the ugly i would change +
+
+The worst thing about our code is that we don't measure our distance from object other than the basket which causes us to crash into other robots and the baskets backboard. Another bad thing is that our thrower speed calculation was linear which made it hard to throw in the balls. So i would change the depth camera usage to map out certain object if they are too close and execute countermeasures, and also remeasure our throwing distances and speeds.
+
 # Personal comments
 
 ### Kaspar +
@@ -123,6 +133,10 @@ Suggestions for instructors: I understand that the current instructors work else
 
 ### Madis +
 I worked on the mechanics part of the robot. I learned to use Fusion 360 Autodesk software and how to design a functional robot from scratch. Learned how to use a mill and lathe. Next time I would look over my design a few more times to discover some mistakes I made. In this course I liked the idea of making all parts of the robot ourselves and getting a real functioning result. I didn’t like that sometimes I couldn’t continue my work, because I had to wait for supervision or the devices I had to use were in use. For future students I recommend starting early with everything and thoroughly thinking it through. For instructors I suggest to communicate more on slack, even if it's not so important, for example, if you haven’t supervised the work yet, but plan to do it in the next hours or day. It would be good to know all the issues right away, not each one with next feedback.
+
+### Priit +
+I worked together with Artur on the programmingof the robot. I learnt that cooperating with others while writing code is not always the best way, since we had many inconsistencies and problems. Next time i would definetly set out certain parts of the code i am responsible for and the other parts that my teammate is responsible for. The worst thing about the course was definetly the lack of lessons weekly which of some were completely gone for the progress presentation which actually dwarfed our progress i would say. Everything else in the course was great. Suggestions for other student would definetly be that try to complete the code and the robot by the 1st of December or even earlier, since building the new robot brings alot of new variables which could absolutely take all of your time away.
+The instructors were very friendly and knowledgeable. There were some weird rules about formatting weekly reports, but other then that i have no personal quarrels.
 
 
 == Blog
