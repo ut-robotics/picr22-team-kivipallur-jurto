@@ -1,5 +1,5 @@
-:1: https://github.com/ut-robotics/picr22-boot-camp-programming +
-:2: https://github.com/ut-robotics/robot-basketball-manager +
+:1: https://github.com/ut-robotics/picr22-boot-camp-programming 
+:2: https://github.com/ut-robotics/robot-basketball-manager 
 
 # Kivipallu jürto
 
