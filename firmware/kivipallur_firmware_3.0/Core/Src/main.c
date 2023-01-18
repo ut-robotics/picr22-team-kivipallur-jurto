@@ -186,7 +186,7 @@ int32_t PIDcontrol(MotorControl* control, int16_t position){
 	return control->p_gain * error + control->i_gain * control->integraal;
 }
 
-//Throw speed control function
+//Throw speed values
 uint16_t Thrower_Send(uint16_t com) {
 		if (com > 6000) {
 			return 6000;
@@ -355,10 +355,10 @@ int main(void)
 	    	        timer = 0;
 	    	        enable_pid = 1;
 
-	  	        feedback.speed1 = motor1Control.positionChange; // (4)
-	  	        feedback.speed2 = motor2Control.positionChange;
-	  	        //feedback.speed3 = motor3Control.positionChange;
-	  	        feedback.speed3 = command.throwerSpeed;
+	  	        feedback.speed1 = motor1Control.positionChange; // (4) //Mootor1
+	  	        feedback.speed2 = motor2Control.positionChange;  ////Mootor2
+	  	        //feedback.speed3 = motor3Control.positionChange;  ////Mootor3
+	  	        feedback.speed3 = command.throwerSpeed;  //Trhower
 
 	  	        CDC_Transmit_FS(&feedback, sizeof(feedback)); // (5)
 	  	      }
@@ -366,7 +366,7 @@ int main(void)
 
 }
   /* USER CODE END 3 */
-//}
+
 
 /**
   * @brief System Clock Configuration
