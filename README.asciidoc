@@ -1,3 +1,1 @@
-# Kivipallur Jurto electronics branch
 
-## In the electronics folder you will find Kivipallur Jurto mainbord documentation.
