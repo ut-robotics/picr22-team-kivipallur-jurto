@@ -1,0 +1,34 @@
+:1: https://github.com/ut-robotics/picr22-boot-camp-programming 
+:2: https://github.com/ut-robotics/robot-basketball-manager 
+
+# Kivipallu jürto
+
+## Needed libraries for running the code
+
+Python 3.9 - https://www.python.org/downloads/release/python-390/ +
+OpenCV - https://opencv.org/ +
+NumPy - https://numpy.org/ +
+Xbox360controller - https://pypi.org/project/xbox360controller/ +
+Numba - https://numba.pydata.org/ +
+WebSocket(Client) - https://pypi.org/project/websocket-client/ +
+Pyserial - https://pypi.org/project/pyserial/ +
+Pyrealsense2 - https://pypi.org/project/pyrealsense2/ +
+Multiprocessing - https://docs.python.org/3/library/multiprocessing.html +
+
+
+## Steps to run the code.
+
+NOTE: the code can be ran without a referee server and started with a controller +
+      Our code is based on {1}[BootCampCode] +
+      referee server can be found from {2}[HERE] +
+
+
+[horizontal]
+1. Configuring all the colours with file config_colors.py +
+2. If a different robot is used change wheelRadius and wheelDistanceFromCenter in MainMovement.py +
+3. Update the robotID in main.py +
+4. Update the ip and port in ref_commands.py +
+5. Start up the referee server or connect a controller +
+6. Run main.py +
+
+
